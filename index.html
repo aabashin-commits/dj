@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Онлайн-курс «Профессия DJ с нуля» — DJ KIDY</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        primary: '#6266F1',
+        coral: '#F8795D',
+        accentred: '#E63946',
+        accentgreen: '#27AE60',
+        page: '#F1F2F7',
+        ink: '#17181C'
+      },
+      boxShadow: {
+        card: '0 18px 40px -18px rgba(23,24,28,.18)'
+      }
+    }
+  }
+}
+</script>
+</head>
+<body id="top" class="bg-page text-ink font-sans antialiased">
+
+<!-- HEADER -->
+<header class="max-w-[1240px] mx-auto px-4 sm:px-6 pt-5 sm:pt-8">
+  <nav class="flex items-center justify-between gap-4">
+    <a href="#top" class="shrink-0"><img src="assets/logo.png" alt="AREYOU KIDY ME" class="h-10 sm:h-12 w-auto"></a>
+    <div class="hidden lg:flex items-center gap-9 text-[17px] font-medium text-ink/90">
+      <a href="#video" class="hover:text-primary transition">Видео о курсе</a>
+      <a href="#program" class="hover:text-primary transition">Программа и тарифы</a>
+      <a href="#video" class="hover:text-primary transition">Видео о курсе</a>
+      <a href="#faq" class="hover:text-primary transition">Частые вопросы</a>
+      <a href="#contacts" class="hover:text-primary transition">Контакты</a>
+    </div>
+    <a href="#form" class="hidden lg:inline-block bg-primary hover:bg-indigo-600 transition text-white text-[17px] font-medium px-7 py-3.5 rounded-2xl">Запись на обучение</a>
+    <button id="burger" aria-label="Меню" class="lg:hidden p-2 rounded-xl border border-ink/20">
+      <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </nav>
+  <div id="mobileMenu" class="hidden lg:hidden mt-4 bg-white rounded-3xl shadow-card p-6 flex flex-col gap-4 text-lg font-medium">
+    <a href="#video" class="menu-link">Видео о курсе</a>
+    <a href="#program" class="menu-link">Программа и тарифы</a>
+    <a href="#video" class="menu-link">Видео о курсе</a>
+    <a href="#faq" class="menu-link">Частые вопросы</a>
+    <a href="#contacts" class="menu-link">Контакты</a>
+    <a href="#form" class="menu-link bg-primary text-white text-center font-medium px-7 py-4 rounded-2xl">Запись на обучение</a>
+  </div>
+</header>
+
+<main class="max-w-[1240px] mx-auto px-4 sm:px-6">
+
+  <!-- HERO -->
+  <section class="mt-10 sm:mt-16 lg:mt-24 grid lg:grid-cols-[1fr_460px] gap-10 lg:gap-16 items-center">
+    <div>
+      <p class="text-2xl sm:text-3xl font-bold">Онлайн-курс</p>
+      <h1 class="mt-3 text-primary font-extrabold leading-[1.05] tracking-tight text-[42px] sm:text-6xl lg:text-[62px]">Профессия DJ с&nbsp;нуля</h1>
+      <p class="mt-6 text-lg sm:text-2xl leading-snug">Методология, отточенная за 2 года до идеала, благодаря которой ученики начинают играть уже после первого занятия</p>
+      <a href="#form" class="mt-8 block w-full bg-primary hover:bg-indigo-600 transition text-white text-xl sm:text-2xl font-semibold text-center py-5 rounded-2xl">Начать обучение</a>
+      <div class="mt-5 flex items-center justify-between text-lg sm:text-2xl">
+        <span>Регистрация на курс:</span>
+        <span>до 15.08.2026</span>
+      </div>
+    </div>
+    <div class="relative mx-auto w-full max-w-[440px] lg:max-w-none pb-20 sm:pb-24">
+      <div class="rounded-3xl overflow-hidden aspect-[4/5]">
+        <img src="assets/hero.png" alt="Кирилл DJ KIDY за пультом" class="w-full h-full object-cover object-[65%_center]">
+      </div>
+      <div class="absolute bottom-0 -left-2 sm:-left-10 right-4 sm:right-8 bg-white rounded-2xl shadow-card px-6 py-6 text-center">
+        <p class="text-2xl sm:text-3xl font-bold">Кирилл DJ KIDY</p>
+        <p class="mt-2 text-base sm:text-xl tracking-wide">МЕЖДУНАРОДНЫЙ DJ &amp; PRODUCER</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FIT -->
+  <section class="mt-16 sm:mt-24">
+    <h2 class="text-3xl sm:text-4xl font-bold tracking-tight">Тебе подойдет этот курс, если ты:</h2>
+    <div class="mt-6 bg-white rounded-3xl shadow-card px-6 sm:px-10 py-8 sm:py-10 grid md:grid-cols-2 md:grid-rows-3 md:grid-flow-col gap-x-16 gap-y-7">
+      <div class="flex items-baseline gap-4"><span class="text-primary text-3xl font-bold leading-none">1</span><p class="text-lg sm:text-2xl">В поисках достойного хобби</p></div>
+      <div class="flex items-baseline gap-4"><span class="text-primary text-3xl font-bold leading-none">2</span><p class="text-lg sm:text-2xl">Ищешь творческую профессию</p></div>
+      <div class="flex items-baseline gap-4"><span class="text-primary text-3xl font-bold leading-none">3</span><p class="text-lg sm:text-2xl">Хочешь переехать за границу</p></div>
+      <div class="flex items-baseline gap-4"><span class="text-primary text-3xl font-bold leading-none">4</span><p class="text-lg sm:text-2xl">Жаждешь стать звездой</p></div>
+      <div class="flex items-baseline gap-4"><span class="text-primary text-3xl font-bold leading-none">5</span><p class="text-lg sm:text-2xl">Желаешь прокачать свои навыки</p></div>
+      <div class="flex items-baseline gap-4"><span class="text-primary text-3xl font-bold leading-none">6</span><p class="text-lg sm:text-2xl">Задумываешься о собственном проекте</p></div>
+    </div>
+  </section>
+
+  <!-- VIDEO -->
+  <section id="video" class="mt-16 sm:mt-24 scroll-mt-8">
+    <h2 class="text-3xl sm:text-4xl font-bold tracking-tight">Что тебя ждет на онлайн-курсе "Профессия DJ с нуля”</h2>
+    <div class="mt-8 bg-[#D7D7D7] rounded-sm w-full aspect-video"></div>
+    <div class="mt-6 grid md:grid-cols-3 gap-5">
+      <div class="bg-white rounded-2xl shadow-card px-7 py-7 text-lg sm:text-xl leading-snug">Смотришь уроки онлайн<br>в своем удобном темпе<br>+ подключаешься на эфир<br>с DJ KIDY 1 раз в месяц</div>
+      <div class="bg-white rounded-2xl shadow-card px-7 py-7 text-lg sm:text-xl leading-snug flex flex-col justify-center">Выполняешь домашнее<br>задание на своем<br>ноутбуке и контроллере</div>
+      <div class="bg-white rounded-2xl shadow-card px-7 py-7 text-lg sm:text-xl leading-snug flex flex-col justify-center">Общаешься в чате со мной,<br>кураторами и другими<br>учениками курса</div>
+    </div>
+  </section>
+
+  <!-- PROGRAM -->
+  <section id="program" class="mt-16 sm:mt-24 scroll-mt-8">
+    <div class="bg-white rounded-3xl shadow-card px-6 sm:px-12 py-10 sm:py-14">
+      <h2 class="text-3xl sm:text-4xl font-bold tracking-tight">Программа курса "Профессия DJ с нуля”</h2>
+      <div class="mt-10 grid lg:grid-cols-2 gap-x-14 gap-y-14">
+
+        <!-- BASE -->
+        <div class="flex flex-col">
+          <h3 class="text-2xl sm:text-3xl font-bold">БАЗА диджеинга</h3>
+          <div class="mt-5 space-y-4 text-lg sm:text-xl leading-snug">
+            <p>Освоишь оборудование Pioneer DJ и AlphaTheta</p>
+            <p>Научишься сводить так, чтобы миксы звучали цельно, а не как два случайных трека</p>
+            <p>Разберёшься в Rekordbox и Serato быстрее, чем большинство делает это методом проб и ошибок</p>
+            <p>Соберёшь свою первую музыкальную библиотеку и запишешь выпускной микс, который не стыдно показать другим DJ или арт-директорам</p>
+          </div>
+          <div class="mt-8 space-y-4">
+            <div class="module border border-ink rounded-2xl px-6 py-4">
+              <button type="button" class="module-toggle w-full flex items-center justify-between gap-4 text-left">
+                <span><span class="block text-2xl font-bold">Модуль</span><span class="block text-lg sm:text-xl mt-1">Старт обучения</span><span class="block text-lg text-ink/50 mt-1">1 урок</span></span>
+                <svg class="chevron w-7 h-7 shrink-0 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg>
+              </button>
+              <div class="module-body hidden pt-3"></div>
+            </div>
+            <div class="module border border-ink rounded-2xl px-6 py-4">
+              <button type="button" class="module-toggle w-full flex items-center justify-between gap-4 text-left">
+                <span><span class="block text-2xl font-bold">Модуль</span><span class="block text-lg sm:text-xl mt-1">Рабочее пространство диджея</span><span class="block text-lg text-ink/50 mt-1">3 урока и ДЗ</span></span>
+                <svg class="chevron w-7 h-7 shrink-0 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg>
+              </button>
+              <div class="module-body hidden pt-3"></div>
+            </div>
+            <div class="module border border-ink rounded-2xl px-6 py-4">
+              <button type="button" class="module-toggle w-full flex items-center justify-between gap-4 text-left">
+                <span><span class="block text-2xl font-bold">Модуль</span><span class="block text-lg sm:text-xl mt-1">Музыкальная структура и анализ треков</span><span class="block text-lg text-ink/50 mt-1">3 урока + ДЗ</span></span>
+                <svg class="chevron w-7 h-7 shrink-0 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg>
+              </button>
+              <div class="module-body hidden pt-3"></div>
+            </div>
+            <div class="module border border-ink rounded-2xl px-6 py-4">
+              <button type="button" class="module-toggle w-full flex items-center justify-between gap-4 text-left">
+                <span><span class="block text-2xl font-bold">Модуль</span><span class="block text-lg sm:text-xl mt-1">Основы сведения и эквализации</span><span class="block text-lg text-ink/50 mt-1">1 урок</span></span>
+                <svg class="chevron w-7 h-7 shrink-0 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg>
+              </button>
+              <div class="module-body hidden pt-3"></div>
+            </div>
+            <div class="module border border-ink rounded-2xl px-6 py-4">
+              <button type="button" class="module-toggle w-full flex items-center justify-between gap-4 text-left">
+                <span><span class="block text-2xl font-bold">Модуль</span><span class="block text-lg sm:text-xl mt-1">Техника, эффекты и финальный микс</span><span class="block text-lg text-ink/50 mt-1">5 уроков + 3 ДЗ + БОНУС</span></span>
+                <svg class="chevron w-7 h-7 shrink-0 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg>
+              </button>
+              <div class="module-body hidden pt-3"></div>
+            </div>
+          </div>
+          <p class="mt-10 text-center text-5xl sm:text-[56px] font-bold">20.000р</p>
+          <a href="#form" class="mt-8 block w-full bg-primary hover:bg-indigo-600 transition text-white text-xl sm:text-2xl font-medium text-center py-5 rounded-2xl">Оплатить "БАЗА диджеинга"</a>
+        </div>
+
+        <!-- PRO -->
+        <div class="flex flex-col">
+          <h3 class="text-2xl sm:text-3xl font-bold">Глубокое погружение</h3>
+          <div class="mt-5 space-y-4 text-lg sm:text-xl leading-snug">
+            <p>Этот курс для тех, кто уже освоил базу и хочет выйти на новый уровень</p>
+            <p>На этом курсе ты разберёшься в продвинутых возможностях AlphaTheta, Rekordbox и Serato DJ Pro, чтобы использовать оборудование на максимум, а не только базовые функции</p>
+            <p>Навыки, которые получишь на курсе, пригодятся на любой аппаратуре: в клубе, на вечеринке, при записи сетов или создании контента для соцсетей</p>
+          </div>
+          <div class="mt-8 space-y-4">
+            <div class="module border border-ink rounded-2xl px-6 py-4">
+              <button type="button" class="module-toggle w-full flex items-center justify-between gap-4 text-left">
+                <span><span class="block text-2xl font-bold">Модуль</span><span class="block text-lg sm:text-xl mt-1">Старт обучения</span><span class="block text-lg text-ink/50 mt-1">1 урок</span></span>
+                <svg class="chevron w-7 h-7 shrink-0 transition-transform rotate-180" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg>
+              </button>
+              <div class="module-body pt-4">
+                <p class="text-2xl font-bold">1ый урок "Подготовка к курсу PRO "</p>
+                <p class="mt-1 text-lg sm:text-xl leading-snug">Рассказываю где регистрироваться, как качать и устанавливать все необходимое для курса</p>
+              </div>
+            </div>
+            <div class="module border border-ink rounded-2xl px-6 py-4">
+              <button type="button" class="module-toggle w-full flex items-center justify-between gap-4 text-left">
+                <span><span class="block text-2xl font-bold">Модуль</span><span class="block text-lg sm:text-xl mt-1">Продвинутые инструменты</span><span class="block text-lg text-ink/50 mt-1">11 уроков + 3 ДЗ</span></span>
+                <svg class="chevron w-7 h-7 shrink-0 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg>
+              </button>
+              <div class="module-body hidden pt-3"></div>
+            </div>
+            <div class="module border border-ink rounded-2xl px-6 py-4">
+              <button type="button" class="module-toggle w-full flex items-center justify-between gap-4 text-left">
+                <span><span class="block text-2xl font-bold">БОНУС</span><span class="block text-lg sm:text-xl mt-1">Доступ к комьюнити<br>Министерство Диджеинга на 1 месяц</span></span>
+                <svg class="chevron w-7 h-7 shrink-0 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg>
+              </button>
+              <div class="module-body hidden pt-3"></div>
+            </div>
+          </div>
+          <div class="mt-10 text-center">
+            <p class="text-[34px] sm:text-5xl lg:text-[52px] font-bold"><span class="relative inline-block">20.000р<span class="absolute left-[-4%] right-[-4%] top-1/2 h-[5px] bg-accentred -rotate-[5deg]"></span></span> — <span class="text-accentred">10.000р</span></p>
+            <p class="mt-2 text-sm sm:text-base underline underline-offset-2">при покупке "БАЗЫ диджеинга" вместе с "Глубоким погружением"</p>
+          </div>
+          <a href="#form" class="mt-6 block w-full bg-accentred hover:brightness-95 transition text-white text-xl sm:text-2xl font-medium text-center py-4 rounded-2xl leading-tight">Оплатить "БАЗА диджеинга"<br>+ "Глубокое погружение"</a>
+          <a href="#form" class="mt-4 block w-full bg-accentgreen hover:brightness-95 transition text-white text-xl sm:text-2xl font-medium text-center py-4 rounded-2xl">Оплатить только "Глубокое погружение"</a>
+        </div>
+
+      </div>
+    </div>
+    <div class="mt-10 text-center">
+      <a href="#form" class="inline-block bg-coral hover:brightness-95 transition text-white text-xl sm:text-2xl font-medium px-10 py-5 rounded-2xl">Заказать консультацию от DJ KIDY</a>
+    </div>
+  </section>
+
+  <!-- AUTHOR -->
+  <section id="author" class="mt-16 sm:mt-24 scroll-mt-8">
+    <p class="text-2xl sm:text-3xl font-semibold">Автор онлайн-курса</p>
+    <h2 class="mt-2 text-3xl sm:text-5xl font-bold tracking-tight">Кирилл DJ KIDY</h2>
+    <div class="mt-8 grid lg:grid-cols-2 gap-10 items-start">
+      <div class="bg-[#D7D7D7] w-full aspect-[4/5] lg:aspect-auto lg:self-stretch min-h-[320px]"></div>
+      <div class="space-y-5 text-lg sm:text-2xl leading-snug lg:pt-1">
+        <p>8 лет живет в Дубае</p>
+        <p>Выступает в самых топовых клубах и гастролирует по всему миру</p>
+        <p>Имеет совместки с HUGEL, Joezi, Aaron Sevilla &amp; Lizwi, Idd Aziz</p>
+        <p>Ротации на BBC Radio 1</p>
+        <p>Чарты Beatport + попадание в топ 50 лучших треков года.</p>
+        <p>Победитель самого крупного мирового DJ Баттла - DMC Middle East в номинации Open Format</p>
+        <p>В 17 лет выиграл 2 баттла - лучший скретч DJ и лучший спидмикс DJ</p>
+        <p>Выступал на: F1 Abu Dhabi Grand Prix 2025<br>Главной сцене Expo 2020 Dubai UNTOLD Dubai 2024, 2025.</p>
+        <p>Разогревал David Guetta</p>
+        <p>Треки KIDY играли мировые звезды:<br>Black Coffee, MËSTIZA, HUGEL, Shoba Warrior,<br>Alex Wann и ThembaП</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section id="reviews" class="mt-16 sm:mt-24 scroll-mt-8">
+    <h2 class="text-3xl sm:text-4xl font-bold tracking-tight">Отзывы учеников курса</h2>
+    <div id="carousel" class="mt-8 flex gap-5 overflow-x-auto snap-x snap-mandatory scrollbar-none [-ms-overflow-style:none] [scrollbar-width:none]">
+      <article class="snap-start shrink-0 w-[85%] sm:w-[420px] lg:w-[calc((100%-2.5rem)/3)] bg-white rounded-2xl shadow-card px-7 py-7">
+        <div class="flex items-center gap-4">
+          <img src="assets/avatar.png" alt="Антон Селивёрстов" class="w-16 h-16 rounded-full object-cover">
+          <div><p class="text-xl sm:text-2xl font-bold">Антон Селивёрстов</p><p class="text-lg text-ink/50">DJ Арбуз</p></div>
+        </div>
+        <p class="mt-4 text-lg sm:text-xl leading-snug">Привет, спасибо тебе огромное за все что ты делаешь для диджеев! Плейлисты, видео на ютуб, интервью, это все очень интересно.</p>
+      </article>
+      <article class="snap-start shrink-0 w-[85%] sm:w-[420px] lg:w-[calc((100%-2.5rem)/3)] bg-white rounded-2xl shadow-card px-7 py-7">
+        <div class="flex items-center gap-4">
+          <img src="assets/avatar.png" alt="Антон Селивёрстов" class="w-16 h-16 rounded-full object-cover">
+          <div><p class="text-xl sm:text-2xl font-bold">Антон Селивёрстов</p><p class="text-lg text-ink/50">DJ Арбуз</p></div>
+        </div>
+        <p class="mt-4 text-lg sm:text-xl leading-snug">Привет, спасибо тебе огромное за все что ты делаешь для диджеев! Плейлисты, видео на ютуб, интервью, это все очень интересно.</p>
+      </article>
+      <article class="snap-start shrink-0 w-[85%] sm:w-[420px] lg:w-[calc((100%-2.5rem)/3)] bg-white rounded-2xl shadow-card px-7 py-7">
+        <div class="flex items-center gap-4">
+          <img src="assets/avatar.png" alt="Антон Селивёрстов" class="w-16 h-16 rounded-full object-cover">
+          <div><p class="text-xl sm:text-2xl font-bold">Антон Селивёрстов</p><p class="text-lg text-ink/50">DJ Арбуз</p></div>
+        </div>
+        <p class="mt-4 text-lg sm:text-xl leading-snug">Привет, спасибо тебе огромное за все что ты делаешь для диджеев! Плейлисты, видео на ютуб, интервью, это все очень интересно.</p>
+      </article>
+    </div>
+    <div class="mt-6 flex justify-end gap-3">
+      <button id="prevBtn" aria-label="Назад" class="bg-white shadow-card rounded-xl p-4 hover:bg-page transition">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+      </button>
+      <button id="nextBtn" aria-label="Вперед" class="bg-white shadow-card rounded-xl p-4 hover:bg-page transition">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- FORM -->
+  <section id="form" class="mt-16 sm:mt-24 scroll-mt-8">
+    <div class="bg-white rounded-3xl shadow-card px-6 sm:px-12 py-10 sm:py-14">
+      <h2 class="text-2xl sm:text-4xl font-bold tracking-tight text-center leading-tight">Заполни форму и получи возможность выступить на одной сцене<br class="hidden lg:block"> с DJ KIDY после прохождения курса*</h2>
+      <form id="leadForm" novalidate class="mt-10 grid lg:grid-cols-2 gap-10 items-start">
+        <div>
+          <input type="text" name="name" required placeholder="Имя*" class="w-full border border-ink rounded-xl px-5 py-4 text-lg sm:text-xl bg-white placeholder:text-ink focus:outline-none focus:ring-2 focus:ring-primary">
+          <input type="tel" name="phone" required placeholder="Номер телефона*" class="mt-4 w-full border border-ink rounded-xl px-5 py-4 text-lg sm:text-xl bg-white placeholder:text-ink focus:outline-none focus:ring-2 focus:ring-primary">
+          <label class="mt-4 flex items-start gap-3 cursor-pointer select-none">
+            <input type="checkbox" name="agree" required class="mt-0.5 w-5 h-5 shrink-0 rounded border-ink accent-[#6266F1]">
+            <span class="text-sm leading-snug">Нажимая на кнопку "ОТПРАВИТЬ ЗАЯВКУ" я соглашаюсь<br class="hidden sm:block"> с <a href="#" class="underline underline-offset-2">Пользовательским соглашением</a> и <a href="#" class="underline underline-offset-2">Положением о персональных данных</a></span>
+          </label>
+        </div>
+        <div class="text-center lg:pt-1">
+          <p class="text-lg sm:text-2xl font-bold leading-snug">У каждого выпускника и участника комьюнити Министерство Диджеинга есть шанс выступить совместно на одной сцене с Кириллом DJ KIDY</p>
+          <p class="mt-5 text-lg sm:text-2xl text-ink/50 leading-snug">*условия, гонорар и уровень навыков обговариваются незадолго до мероприятия</p>
+        </div>
+        <div class="lg:col-span-2 flex justify-center">
+          <button type="submit" class="w-full sm:w-[420px] bg-primary hover:bg-indigo-600 transition text-white text-xl sm:text-2xl font-medium py-4 rounded-2xl">Отправить</button>
+        </div>
+        <p id="formMsg" class="hidden lg:col-span-2 text-center text-lg font-medium"></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="mt-16 sm:mt-24 scroll-mt-8">
+    <h2 class="text-3xl sm:text-4xl font-bold tracking-tight">FAQ</h2>
+    <div class="mt-8 space-y-4">
+      <div class="faq-item bg-white rounded-2xl shadow-card px-6 sm:px-9 py-6">
+        <button type="button" class="faq-toggle w-full flex items-center justify-between gap-6 text-left">
+          <span class="flex-1"><span class="block text-xl sm:text-2xl font-bold">Как происходит обучение?</span><span class="faq-body block mt-2 text-lg sm:text-xl leading-snug">Обучение проходит в удобном для вас формате, совмещающем в себе прямые эфиры и классную атмосферу в комьюнити</span></span>
+          <svg class="chevron w-7 h-7 shrink-0 transition-transform rotate-180" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg>
+        </button>
+      </div>
+      <div class="faq-item bg-white rounded-2xl shadow-card px-6 sm:px-9 py-6">
+        <button type="button" class="faq-toggle w-full flex items-center justify-between gap-6 text-left">
+          <span class="flex-1"><span class="block text-xl sm:text-2xl font-bold">Как происходит обучение?</span><span class="faq-body hidden mt-2 text-lg sm:text-xl leading-snug">Обучение проходит в удобном для вас формате, совмещающем в себе прямые эфиры и классную атмосферу в комьюнити</span></span>
+          <svg class="chevron w-7 h-7 shrink-0 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg>
+        </button>
+      </div>
+      <div class="faq-item bg-white rounded-2xl shadow-card px-6 sm:px-9 py-6">
+        <button type="button" class="faq-toggle w-full flex items-center justify-between gap-6 text-left">
+          <span class="flex-1"><span class="block text-xl sm:text-2xl font-bold">Как происходит обучение?</span><span class="faq-body hidden mt-2 text-lg sm:text-xl leading-snug">Обучение проходит в удобном для вас формате, совмещающем в себе прямые эфиры и классную атмосферу в комьюнити</span></span>
+          <svg class="chevron w-7 h-7 shrink-0 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg>
+        </button>
+      </div>
+      <div class="faq-item bg-white rounded-2xl shadow-card px-6 sm:px-9 py-6">
+        <button type="button" class="faq-toggle w-full flex items-center justify-between gap-6 text-left">
+          <span class="flex-1"><span class="block text-xl sm:text-2xl font-bold">Как происходит обучение?</span><span class="faq-body hidden mt-2 text-lg sm:text-xl leading-snug">Обучение проходит в удобном для вас формате, совмещающем в себе прямые эфиры и классную атмосферу в комьюнити</span></span>
+          <svg class="chevron w-7 h-7 shrink-0 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg>
+        </button>
+      </div>
+      <div class="faq-item bg-white rounded-2xl shadow-card px-6 sm:px-9 py-6">
+        <button type="button" class="faq-toggle w-full flex items-center justify-between gap-6 text-left">
+          <span class="flex-1"><span class="block text-xl sm:text-2xl font-bold">Как происходит обучение?</span><span class="faq-body hidden mt-2 text-lg sm:text-xl leading-snug">Обучение проходит в удобном для вас формате, совмещающем в себе прямые эфиры и классную атмосферу в комьюнити</span></span>
+          <svg class="chevron w-7 h-7 shrink-0 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer id="contacts" class="max-w-[1240px] mx-auto px-4 sm:px-6 mt-16 sm:mt-24 pb-12 scroll-mt-8">
+  <div class="grid lg:grid-cols-[300px_1fr_1fr] gap-10">
+    <a href="#" class="border border-ink rounded-3xl min-h-[180px] lg:min-h-0 flex items-center justify-center text-2xl sm:text-3xl font-semibold hover:bg-white transition">Юр.информация</a>
+    <div>
+      <p class="text-3xl sm:text-4xl font-bold">Разделы сайта</p>
+      <ul class="mt-5 space-y-3 text-xl sm:text-2xl">
+        <li><a href="#reviews" class="hover:text-primary transition">Результаты</a></li>
+        <li><a href="#reviews" class="hover:text-primary transition">Отзывы</a></li>
+        <li><a href="#program" class="hover:text-primary transition">Программа курса</a></li>
+        <li><a href="#faq" class="hover:text-primary transition">Частые вопросы</a></li>
+        <li><a href="#contacts" class="hover:text-primary transition">Контакты</a></li>
+      </ul>
+      <div class="mt-8 flex flex-col items-start gap-3">
+        <a href="#" class="border border-ink rounded-full px-6 py-2.5 text-base sm:text-lg font-medium hover:bg-white transition">Политика конфиденциальности</a>
+        <a href="#" class="border border-ink rounded-full px-6 py-2.5 text-base sm:text-lg font-medium hover:bg-white transition">Соглашение обработки персональных данных</a>
+      </div>
+    </div>
+    <div class="flex flex-col">
+      <p class="text-3xl sm:text-4xl font-bold">Контакты</p>
+      <ul class="mt-5 space-y-3 text-xl sm:text-2xl">
+        <li><a href="mailto:info@kakayatocompaniya.ru" class="hover:text-primary transition break-all">info@kakayatocompaniya.ru</a></li>
+        <li><a href="tel:+79999999999" class="hover:text-primary transition">+7 (999) 999-99-99</a></li>
+        <li><a href="#" class="font-semibold underline underline-offset-4">Связаться в Telegram</a></li>
+      </ul>
+      <a href="#form" class="mt-6 inline-block bg-primary hover:bg-indigo-600 transition text-white text-xl sm:text-2xl font-medium text-center px-8 py-4 rounded-2xl self-start w-full sm:w-auto">Получить консультацию</a>
+      <a href="#top" class="mt-8 lg:mt-auto border border-ink rounded-2xl text-xl sm:text-2xl font-medium text-center px-12 py-3.5 hover:bg-white transition self-start w-full sm:w-auto lg:self-end">Наверх</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Mobile menu
+const burger = document.getElementById('burger');
+const mobileMenu = document.getElementById('mobileMenu');
+burger.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.add('hidden')));
+
+// Program module accordions
+document.querySelectorAll('.module-toggle').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const body = btn.parentElement.querySelector('.module-body');
+    const chevron = btn.querySelector('.chevron');
+    if (body.innerHTML.trim() === '') { chevron.classList.toggle('rotate-180'); return; }
+    body.classList.toggle('hidden');
+    chevron.classList.toggle('rotate-180');
+  });
+});
+
+// FAQ accordions
+document.querySelectorAll('.faq-toggle').forEach(btn => {
+  btn.addEventListener('click', () => {
+    btn.querySelector('.faq-body').classList.toggle('hidden');
+    btn.querySelector('.chevron').classList.toggle('rotate-180');
+  });
+});
+
+// Reviews carousel
+const carousel = document.getElementById('carousel');
+const step = () => (carousel.querySelector('article').offsetWidth + 20);
+document.getElementById('prevBtn').addEventListener('click', () => carousel.scrollBy({ left: -step(), behavior: 'smooth' }));
+document.getElementById('nextBtn').addEventListener('click', () => carousel.scrollBy({ left: step(), behavior: 'smooth' }));
+
+// Lead form
+document.getElementById('leadForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const f = e.target, msg = document.getElementById('formMsg');
+  const name = f.name.value.trim(), phone = f.phone.value.trim();
+  msg.classList.remove('hidden');
+  if (!name || !phone) { msg.textContent = 'Заполните имя и номер телефона'; msg.className = msg.className.replace('hidden','') ; msg.style.color = '#E63946'; return; }
+  if (!f.agree.checked) { msg.textContent = 'Необходимо согласие с условиями'; msg.style.color = '#E63946'; return; }
+  msg.textContent = 'Заявка отправлена! Мы свяжемся с вами в ближайшее время.';
+  msg.style.color = '#27AE60';
+  f.reset();
+});
+</script>
+</body>
+</html>
