@@ -73,7 +73,7 @@ tailwind.config = {
       <div class="rounded-3xl overflow-hidden aspect-[4/5]">
         <img src="assets/hero.png" alt="Кирилл DJ KIDY за пультом" class="w-full h-full object-cover object-[65%_center]">
       </div>
-      <div class="absolute bottom-0 -left-2 sm:-left-10 right-4 sm:right-8 bg-white rounded-2xl shadow-card px-6 py-6 text-center">
+      <div class="absolute bottom-0 left-4 sm:-left-10 right-4 sm:right-8 bg-white rounded-2xl shadow-card px-6 py-6 text-center">
         <p class="text-2xl sm:text-3xl font-bold">Кирилл DJ KIDY</p>
         <p class="mt-2 text-base sm:text-xl tracking-wide">МЕЖДУНАРОДНЫЙ DJ &amp; PRODUCER</p>
       </div>
@@ -388,19 +388,34 @@ tailwind.config = {
   <!-- REVIEWS -->
   <section id="reviews" class="mt-16 sm:mt-24 scroll-mt-8">
     <h2 class="text-3xl sm:text-4xl font-bold tracking-tight">Отзывы учеников курса</h2>
-    <div class="mt-8 grid sm:grid-cols-2 gap-5 items-start">
-      <article class="rounded-2xl shadow-card overflow-hidden">
-        <img src="assets/otziv1.jpeg" alt="Отзыв ученика из Казахстана" class="w-full h-auto">
-      </article>
-      <article class="rounded-2xl shadow-card overflow-hidden">
-        <img src="assets/otziv3.jpeg" alt="Отзыв ученика курса" class="w-full h-auto">
-      </article>
-      <article class="rounded-2xl shadow-card overflow-hidden">
-        <img src="assets/otziv2.jpeg" alt="Отзыв ученика об академии" class="w-full h-auto">
-      </article>
-      <article class="rounded-2xl shadow-card overflow-hidden">
-        <img src="assets/otziv4.jpeg" alt="Отзыв ученика об академии" class="w-full h-auto">
-      </article>
+    <div id="reviewsSlider" class="mt-8 flex overflow-x-auto snap-x snap-mandatory scroll-smooth scrollbar-none [-ms-overflow-style:none] [scrollbar-width:none]">
+      <div class="snap-start shrink-0 w-full columns-1 sm:columns-2 lg:columns-3 gap-4 sm:gap-5">
+        <article class="mb-4 sm:mb-5 break-inside-avoid rounded-2xl shadow-card overflow-hidden"><img src="assets/otziv14.jpeg" alt="Отзыв ученика" class="w-full h-auto"></article>
+        <article class="mb-4 sm:mb-5 break-inside-avoid rounded-2xl shadow-card overflow-hidden"><img src="assets/otziv10.jpeg" alt="Отзыв ученика" class="w-full h-auto"></article>
+        <article class="mb-4 sm:mb-5 break-inside-avoid rounded-2xl shadow-card overflow-hidden"><img src="assets/otziv9.jpeg" alt="Отзыв ученика" class="w-full h-auto"></article>
+        <article class="mb-4 sm:mb-5 break-inside-avoid rounded-2xl shadow-card overflow-hidden"><img src="assets/otziv5.jpeg" alt="Отзыв ученика" class="w-full h-auto"></article>
+        <article class="mb-4 sm:mb-5 break-inside-avoid rounded-2xl shadow-card overflow-hidden"><img src="assets/otziv3.jpeg" alt="Отзыв ученика" class="w-full h-auto"></article>
+        <article class="mb-4 sm:mb-5 break-inside-avoid rounded-2xl shadow-card overflow-hidden"><img src="assets/otziv8.jpeg" alt="Отзыв ученика" class="w-full h-auto"></article>
+      </div>
+      <div class="snap-start shrink-0 w-full columns-1 sm:columns-2 lg:columns-3 gap-4 sm:gap-5">
+        <article class="mb-4 sm:mb-5 break-inside-avoid rounded-2xl shadow-card overflow-hidden"><img src="assets/otziv4.jpeg" alt="Отзыв ученика" class="w-full h-auto"></article>
+        <article class="mb-4 sm:mb-5 break-inside-avoid rounded-2xl shadow-card overflow-hidden"><img src="assets/otziv12.jpeg" alt="Отзыв ученика" class="w-full h-auto"></article>
+        <article class="mb-4 sm:mb-5 break-inside-avoid rounded-2xl shadow-card overflow-hidden"><img src="assets/otziv13.jpeg" alt="Отзыв ученика" class="w-full h-auto"></article>
+        <article class="mb-4 sm:mb-5 break-inside-avoid rounded-2xl shadow-card overflow-hidden"><img src="assets/otziv7.jpeg" alt="Отзыв ученика" class="w-full h-auto"></article>
+        <article class="mb-4 sm:mb-5 break-inside-avoid rounded-2xl shadow-card overflow-hidden"><img src="assets/otziv6.jpeg" alt="Отзыв ученика" class="w-full h-auto"></article>
+        <article class="mb-4 sm:mb-5 break-inside-avoid rounded-2xl shadow-card overflow-hidden"><img src="assets/otziv2.jpeg" alt="Отзыв ученика" class="w-full h-auto"></article>
+        <article class="mb-4 sm:mb-5 break-inside-avoid rounded-2xl shadow-card overflow-hidden"><img src="assets/otziv11.jpeg" alt="Отзыв ученика" class="w-full h-auto"></article>
+        <article class="mb-4 sm:mb-5 break-inside-avoid rounded-2xl shadow-card overflow-hidden"><img src="assets/otziv1.jpeg" alt="Отзыв ученика" class="w-full h-auto"></article>
+      </div>
+    </div>
+    <div class="mt-6 flex items-center justify-center gap-4">
+      <button id="revPrev" aria-label="Назад" class="bg-white shadow-card rounded-xl p-4 hover:bg-page transition">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+      </button>
+      <div id="revDots" class="flex items-center gap-2"></div>
+      <button id="revNext" aria-label="Вперед" class="bg-white shadow-card rounded-xl p-4 hover:bg-page transition">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+      </button>
     </div>
   </section>
 
@@ -567,6 +582,31 @@ document.querySelectorAll('.faq-toggle').forEach(btn => {
     btn.querySelector('.chevron').classList.toggle('rotate-180');
   });
 });
+
+// Reviews slider
+const reviewsSlider = document.getElementById('reviewsSlider');
+if (reviewsSlider) {
+  const slides = reviewsSlider.children.length;
+  const dotsWrap = document.getElementById('revDots');
+  for (let i = 0; i < slides; i++) {
+    const dot = document.createElement('button');
+    dot.setAttribute('aria-label', 'Слайд ' + (i + 1));
+    dot.className = 'w-2.5 h-2.5 rounded-full bg-ink/20 transition';
+    dot.addEventListener('click', () => reviewsSlider.scrollTo({ left: i * reviewsSlider.clientWidth, behavior: 'smooth' }));
+    dotsWrap.appendChild(dot);
+  }
+  const updateDots = () => {
+    const idx = Math.round(reviewsSlider.scrollLeft / reviewsSlider.clientWidth);
+    [...dotsWrap.children].forEach((d, i) => {
+      d.classList.toggle('bg-primary', i === idx);
+      d.classList.toggle('bg-ink/20', i !== idx);
+    });
+  };
+  reviewsSlider.addEventListener('scroll', updateDots, { passive: true });
+  updateDots();
+  document.getElementById('revPrev').addEventListener('click', () => reviewsSlider.scrollBy({ left: -reviewsSlider.clientWidth, behavior: 'smooth' }));
+  document.getElementById('revNext').addEventListener('click', () => reviewsSlider.scrollBy({ left: reviewsSlider.clientWidth, behavior: 'smooth' }));
+}
 
 </script>
 <script src="tg.js"></script>
