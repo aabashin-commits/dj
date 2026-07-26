@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <title>DJ KIDY</title>
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="64" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#5359FF"/>
+      <stop offset="1" stop-color="#AA48FF"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="16" fill="url(#g)"/>
+  <path fill="#FFF" d="M16 16h9v12l11-12h12L33 32l16 16H37L25 36v12h-9z"/>
+</svg>

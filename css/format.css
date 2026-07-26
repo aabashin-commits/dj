@@ -5,32 +5,38 @@
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
-   Плейсхолдер видео
-   TODO: заменить на ролик или эмбед, когда клиент пришлёт.
-   В первой версии здесь стоял серый прямоугольник #D7D7D7 — на тёмной теме
-   он выглядел бы дырой в макете, поэтому подложка из палитры.
+   Видео о курсе
    -------------------------------------------------------------------------- */
 
 .format__video {
   position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
   /* Ширину ограничиваем: 16:9 во всю строку контейнера на 1920 даёт
-     кадр высотой 830px, и страница разрывается пустым прямоугольником. */
+     кадр высотой 830px, и страница разрывается огромным прямоугольником. */
   max-width: 1000px;
   margin: 0 auto var(--gutter);
   aspect-ratio: 16 / 9;
   border-radius: var(--radius-card);
-  background-color: var(--card-bg);
-  background-image: radial-gradient(120% 90% at 50% 120%, rgba(83, 89, 255, .35), transparent 70%);
+  background-color: var(--dark400);
   overflow: hidden;
-  transition: background-color var(--dur) var(--ease);
 }
 
+.format__player {
+  width: 100%;
+  height: 100%;
+  /* Постер 1915×996 чуть уже кадра 16:9 — cover подрезает его по высоте
+     на ~7%, что незаметно, зато не оставляет полей по краям. */
+  object-fit: cover;
+  background-color: var(--dark400);
+}
+
+/* Своя кнопка поверх постера: нативная у каждого браузера выглядит
+   по-своему и выпадает из стиля страницы. Нативные контролы при этом
+   оставлены — перемотка и звук должны работать штатно. */
 .format__play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -40,24 +46,22 @@
   border-radius: var(--radius-pill);
   background-color: var(--white);
   color: var(--black);
-  transition: transform var(--dur) var(--ease),
+  transition: opacity var(--dur) var(--ease),
+              scale var(--dur) var(--ease),
               background-color var(--dur) var(--ease);
 }
 
 .format__play:hover,
 .format__play:focus-visible {
-  transform: scale(1.08);
+  scale: 1.08;
   background-color: var(--gray200);
 }
 
-.format__eq {
-  height: 24px;
-  color: var(--primary200);
-}
-
-.format__video-note {
-  color: var(--text-gray);
-  font-size: var(--fs-small);
+/* Класс вешает js/format.js на время проигрывания. pointer-events снимаем
+   обязательно: невидимая кнопка иначе перехватывала бы клики по видео. */
+.format__video.is-playing .format__play {
+  opacity: 0;
+  pointer-events: none;
 }
 
 /* --------------------------------------------------------------------------
@@ -126,12 +130,5 @@
   .format__play {
     width: 56px;
     height: 56px;
-  }
-
-  /* На узком экране подпись и эквалайзер под кнопкой воспроизведения
-     съедают почти всю высоту кадра 16:9 — оставляем только кнопку. */
-  .format__eq,
-  .format__video-note {
-    display: none;
   }
 }

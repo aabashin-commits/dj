@@ -31,7 +31,14 @@
 })();
 </script>
 
-<link rel="icon" href="assets/img/logo.svg" type="image/svg+xml">
+<!-- Иконки. Пути БЕЗ ведущего слэша — чтобы сайт работал и в подпапке домена.
+     favicon.ico при этом обязан лежать именно в корне: браузеры и поисковые
+     роботы запрашивают /favicon.ico напрямую, мимо разметки. -->
+<link rel="icon" href="favicon.ico" sizes="32x32">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<meta name="theme-color" content="#15161A">
 
 <link rel="stylesheet" href="css/base.css">
 <link rel="stylesheet" href="css/layout.css">
@@ -343,16 +350,19 @@
           смотришь в&nbsp;своём темпе, а&nbsp;вопросы разбираем вживую.</p>
       </div>
 
-      <!-- TODO: заменить плейсхолдер на ролик или эмбед, когда клиент пришлёт -->
+      <!-- Ролик 1920×1080 (16:9). preload="metadata" — файл весит 59 МБ,
+           качать его целиком до первого клика незачем. -->
       <div class="format__video reveal">
+        <video class="format__player" poster="assets/previev.jpg"
+               preload="metadata" playsinline controls>
+          <source src="assets/video.mp4" type="video/mp4">
+          Браузер не умеет проигрывать видео —
+          <a href="assets/video.mp4">скачайте ролик</a>.
+        </video>
+
         <button class="format__play" type="button" aria-label="Смотреть видео о курсе">
           <svg width="28" height="28" aria-hidden="true"><use href="#i-play"/></svg>
         </button>
-        <div class="eq format__eq" aria-hidden="true">
-          <span class="eq__bar"></span><span class="eq__bar"></span><span class="eq__bar"></span>
-          <span class="eq__bar"></span><span class="eq__bar"></span>
-        </div>
-        <p class="format__video-note">Видео о&nbsp;курсе</p>
       </div>
 
       <ul class="format__grid">
@@ -1053,6 +1063,7 @@
 <script src="js/main.js" defer></script>
 <script src="js/header.js" defer></script>
 <script src="js/countdown.js" defer></script>
+<script src="js/format.js" defer></script>
 <script src="js/program.js" defer></script>
 <script src="js/reviews.js" defer></script>
 <script src="js/faq.js" defer></script>
