@@ -1,0 +1,58 @@
+/* ==========================================================================
+   trust.css — бегущая строка достижений
+
+   Стоит сразу под hero: доказательство начинается с первого экрана.
+   В первой версии лендинга эти факты лежали в блоке автора внизу страницы,
+   и до них доходил не каждый.
+   ========================================================================== */
+
+.trust__marquee {
+  padding-block: 20px;
+  border-block: 1px solid var(--border-color);
+  /* Скорость привязана к такту: 24 такта на полный проход ленты. */
+  --marquee-dur: calc(var(--bar) * 24);
+  --marquee-gap: 48px;
+}
+
+.trust__track {
+  align-items: center;
+}
+
+.trust__item {
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+  color: var(--text-gray);
+  font-size: var(--fs-lead);
+  font-weight: var(--fw-medium);
+  white-space: nowrap;
+  transition: color var(--dur) var(--ease);
+}
+
+/* Точка-разделитель между пунктами. Ставим через ::after у элемента,
+   а не отдельными узлами в разметке — так дубль ленты остаётся точной
+   копией первой и шов не заметен. */
+.trust__item::after {
+  content: '';
+  width: 6px;
+  height: 6px;
+  margin-left: 48px;
+  border-radius: var(--radius-pill);
+  background-color: var(--primary300);
+}
+
+@media (max-width: 1024px) {
+  .trust__marquee {
+    padding-block: 16px;
+    --marquee-gap: 28px;
+    --marquee-dur: calc(var(--bar) * 18);
+  }
+
+  .trust__item {
+    font-size: var(--fs-small);
+  }
+
+  .trust__item::after {
+    margin-left: 28px;
+  }
+}

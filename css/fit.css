@@ -1,0 +1,104 @@
+/* ==========================================================================
+   fit.css — «Тебе подойдёт этот курс, если ты»
+
+   Бенто вместо ровной сетки 3×2: ритм 2 / 3 / 1 не даёт списку из шести
+   однотипных пунктов читаться как таблица.
+   ========================================================================== */
+
+.fit__grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: var(--gutter);
+}
+
+.fit__item {
+  display: flex;
+  min-height: 200px;
+}
+
+.fit__item .card__inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+  width: 100%;
+}
+
+/* Ряд 1 — две широкие, ряд 2 — три обычные, ряд 3 — одна во всю ширину. */
+.fit__item:nth-child(1),
+.fit__item:nth-child(2) { grid-column: span 3; }
+.fit__item:nth-child(3),
+.fit__item:nth-child(4),
+.fit__item:nth-child(5) { grid-column: span 2; }
+.fit__item:nth-child(6) { grid-column: span 6; }
+
+/* Последняя карточка широкая и низкая: колонка оставила бы в ней
+   полосу пустоты, поэтому цифра и текст встают в строку. */
+.fit__item:nth-child(6) {
+  min-height: 0;
+}
+
+.fit__item:nth-child(6) .card__inner {
+  flex-direction: row;
+  align-items: center;
+  /* Сбрасываем space-between из общего правила: на ширине 1475px он
+     разносил цифру и текст по противоположным краям карточки,
+     и пара переставала читаться как один пункт. */
+  justify-content: flex-start;
+  gap: 24px;
+}
+
+.fit__num {
+  display: block;
+  color: var(--primary300);
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-bold);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.fit__text {
+  font-size: var(--fs-h4);
+  font-weight: var(--fw-medium);
+  line-height: var(--lh-text);
+}
+
+@media (max-width: 1024px) {
+  .fit__item {
+    min-height: 160px;
+  }
+
+  /* Бенто схлопывается в две колонки: три узких карточки на планшете
+     дают по одному слову в строке. */
+  .fit__item:nth-child(1),
+  .fit__item:nth-child(2),
+  .fit__item:nth-child(3),
+  .fit__item:nth-child(4),
+  .fit__item:nth-child(5) { grid-column: span 3; }
+  .fit__item:nth-child(6) { grid-column: span 6; }
+}
+
+@media (max-width: 576px) {
+  .fit__item,
+  .fit__item:nth-child(1),
+  .fit__item:nth-child(2),
+  .fit__item:nth-child(3),
+  .fit__item:nth-child(4),
+  .fit__item:nth-child(5),
+  .fit__item:nth-child(6) {
+    grid-column: span 6;
+    min-height: 0;
+  }
+
+  /* На телефоне все карточки становятся горизонтальными: так шесть
+     пунктов занимают экран, а не полторы прокрутки. */
+  .fit__item .card__inner {
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .fit__num {
+    flex: 0 0 auto;
+  }
+}

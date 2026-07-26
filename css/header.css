@@ -1,0 +1,225 @@
+/* ==========================================================================
+   header.css — шапка-капсула
+
+   Геометрия с референса: капсула radius 24 на --header-bg с бордером,
+   внутренние поля 16/16/16/24, внешнее поле страницы 8.
+   Капсула идёт во всю ширину экрана, а не по контейнеру контента.
+   ========================================================================== */
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 990;
+  padding: var(--page-gap);
+  /* Фон обязателен: под залипшей шапкой в зазоре 8px просвечивал бы контент. */
+  background-color: var(--main-bg);
+  transition: background-color var(--dur) var(--ease);
+}
+
+.header__wrapper {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 16px 16px 16px 24px;
+  border: 1px solid var(--header-border);
+  border-radius: var(--radius-header);
+  background-color: var(--header-bg);
+  transition: background-color var(--dur) var(--ease),
+              border-color var(--dur) var(--ease),
+              box-shadow var(--dur) var(--ease);
+}
+
+/* Класс вешает header.js после 100px прокрутки — ровно тот же порог,
+   что у референса (data-scroll="100"). */
+.header.is-fixed .header__wrapper {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, .08);
+}
+
+.header__logo {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+}
+
+.header__logo img {
+  width: 86px;
+  height: 32px;
+}
+
+.header__nav {
+  margin-right: auto;
+}
+
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.header-nav__link {
+  font-size: var(--fs-base);
+  white-space: nowrap;
+}
+
+.header-nav__link:hover,
+.header-nav__link:focus-visible {
+  color: var(--primary300);
+}
+
+.header__group {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* --------------------------------------------------------------------------
+   Переключатель темы
+   Обе иконки видны всегда, активную подсвечивает «шайба» — так же,
+   как сделан тумблер на референсе.
+   -------------------------------------------------------------------------- */
+
+.theme-switcher {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex: 0 0 auto;
+  padding: 6px;
+  border-radius: var(--radius-pill);
+  background-color: var(--switcher-bg);
+  transition: background-color var(--dur) var(--ease);
+}
+
+.theme-switcher__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  border-radius: var(--radius-pill);
+  color: var(--text-gray);
+  transition: background-color var(--dur) var(--ease),
+              color var(--dur) var(--ease);
+}
+
+/* Подсвечена иконка ТЕКУЩЕЙ темы: в тёмной — луна, в светлой — солнце. */
+:root[data-theme='dark'] .theme-switcher__icon[data-theme-icon='dark'],
+:root:not([data-theme='light']) .theme-switcher__icon[data-theme-icon='dark'] {
+  background-color: var(--switcher-icon-bg);
+  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, .03);
+  color: var(--moon-color, var(--primary200));
+}
+
+:root[data-theme='light'] .theme-switcher__icon[data-theme-icon='dark'] {
+  background-color: transparent;
+  box-shadow: none;
+  color: var(--text-gray);
+}
+
+:root[data-theme='light'] .theme-switcher__icon[data-theme-icon='light'] {
+  background-color: var(--switcher-icon-bg);
+  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, .03);
+  color: var(--warning);
+}
+
+/* --------------------------------------------------------------------------
+   Бургер и мобильное меню
+   -------------------------------------------------------------------------- */
+
+.header__burger {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-btn);
+  background-color: var(--pill-bg);
+  color: var(--text-color);
+  transition: background-color var(--dur) var(--ease);
+}
+
+.header__burger:hover {
+  background-color: var(--btn-card-hover);
+}
+
+.header__burger-icon--close {
+  display: none;
+}
+
+.header__burger[aria-expanded='true'] .header__burger-icon {
+  display: none;
+}
+
+.header__burger[aria-expanded='true'] .header__burger-icon--close {
+  display: block;
+}
+
+.header__menu {
+  margin-top: 8px;
+  padding: 16px;
+  border: 1px solid var(--header-border);
+  border-radius: var(--radius-header);
+  background-color: var(--header-bg);
+}
+
+.header__menu[hidden] {
+  display: none;
+}
+
+.header__menu-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 16px;
+}
+
+.header__menu-link {
+  display: block;
+  padding: 12px;
+  border-radius: var(--radius-btn);
+  font-size: var(--fs-base);
+  font-weight: var(--fw-medium);
+  transition: background-color var(--dur) var(--ease),
+              color var(--dur) var(--ease);
+}
+
+.header__menu-link:hover,
+.header__menu-link:focus-visible {
+  background-color: var(--pill-bg);
+  color: var(--primary300);
+}
+
+/* --------------------------------------------------------------------------
+   Адаптив
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 1280px) {
+  .header-nav {
+    gap: 20px;
+  }
+
+  .header-nav__link {
+    font-size: var(--fs-small);
+  }
+}
+
+@media (max-width: 1024px) {
+  /* Якоря и кнопка уезжают в бургер-меню: в строку они уже не помещаются,
+     а ужимать их дальше — значит получить нечитаемый мелкий текст. */
+  .header__nav,
+  .header__cta {
+    display: none;
+  }
+
+  .header__burger {
+    display: flex;
+  }
+
+  .header__wrapper {
+    justify-content: space-between;
+    padding: 12px 12px 12px 16px;
+  }
+
+  .header__group {
+    margin-left: auto;
+    gap: 8px;
+  }
+}

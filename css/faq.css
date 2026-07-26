@@ -1,0 +1,74 @@
+/* ==========================================================================
+   faq.css — аккордеон частых вопросов
+
+   При загрузке все пункты закрыты, одновременно раскрыт максимум один —
+   логику держит js/faq.js.
+   ========================================================================== */
+
+.faq__list {
+  display: flex;
+  flex-direction: column;
+}
+
+.faq__item {
+  border-bottom: 1px solid var(--border-color);
+  transition: border-color var(--dur) var(--ease);
+}
+
+.faq__item:first-child .faq__head {
+  padding-top: 0;
+}
+
+.faq__item:last-child {
+  border-bottom: none;
+}
+
+.faq__item:last-child .faq__answer {
+  padding-bottom: 0;
+}
+
+.faq__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  width: 100%;
+  padding: 24px 0;
+  text-align: left;
+  color: var(--text-color);
+  transition: color var(--dur) var(--ease);
+}
+
+.faq__head:hover {
+  color: var(--primary300);
+}
+
+.faq__question {
+  font-size: var(--fs-h4);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-text);
+}
+
+/* Отступ снизу — на самом ответе, а не на .collapse__inner: padding
+   на обёртке не даёт строке грида схлопнуться в ноль и в свёрнутом
+   состоянии из-под вопроса торчала бы обрезанная строка текста
+   (см. предупреждение в animations.css). */
+.faq__answer {
+  padding-bottom: 24px;
+  /* Ответ уже колонки вопроса: длинная строка на 1400px читается тяжело. */
+  max-width: 70ch;
+  color: var(--text-gray);
+  font-size: var(--fs-lead);
+  line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+  .faq__head {
+    gap: 16px;
+    padding: 18px 0;
+  }
+
+  .faq__body .collapse__inner {
+    padding-bottom: 18px;
+  }
+}

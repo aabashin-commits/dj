@@ -1,0 +1,112 @@
+/* ==========================================================================
+   reviews.css — слайдер отзывов
+
+   Прокрутка — родной scroll-snap, без библиотек. Стрелки только управляют
+   scrollLeft, поэтому свайп на телефоне работает сам собой.
+   ========================================================================== */
+
+.reviews__viewport {
+  display: flex;
+  gap: var(--gutter);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  /* Полосу прокрутки прячем: под лентой стоят стрелки, и системный
+     скроллбар только шумит. */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  /* Резинку гасим, чтобы страница под лентой не уезжала вбок. */
+  overscroll-behavior-x: contain;
+}
+
+.reviews__viewport::-webkit-scrollbar {
+  display: none;
+}
+
+.reviews__card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 0 0 calc((100% - var(--gutter) * 2) / 3);
+  scroll-snap-align: start;
+}
+
+.reviews__head {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.reviews__avatar {
+  flex: 0 0 auto;
+  width: 72px;
+  height: 72px;
+  aspect-ratio: 1;
+  border-radius: var(--radius-pill);
+  object-fit: cover;
+}
+
+.reviews__name {
+  font-size: var(--fs-h4);
+  font-weight: var(--fw-bold);
+}
+
+.reviews__nick {
+  margin-top: 2px;
+  color: var(--text-gray);
+  font-size: var(--fs-small);
+}
+
+.reviews__rating {
+  display: flex;
+  gap: 4px;
+  color: var(--warning);
+}
+
+.reviews__rating li {
+  display: flex;
+}
+
+.reviews__text {
+  color: var(--text-color);
+  font-size: var(--fs-lead);
+  line-height: var(--lh-text);
+}
+
+/* --------------------------------------------------------------------------
+   Стрелки
+   -------------------------------------------------------------------------- */
+
+.reviews__nav {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: var(--gap);
+}
+
+/* Шеврон из спрайта смотрит вниз — доворачиваем его в стороны,
+   чтобы не заводить в спрайт ещё две почти одинаковые иконки. */
+.reviews__chevron--prev {
+  rotate: 90deg;
+}
+
+.reviews__chevron--next {
+  rotate: -90deg;
+}
+
+@media (max-width: 1024px) {
+  .reviews__card {
+    flex-basis: calc((100% - var(--gutter)) / 2);
+  }
+}
+
+@media (max-width: 768px) {
+  .reviews__card {
+    /* Соседняя карточка выглядывает на 15% — это подсказка, что ленту
+       можно листать, без неё свайп не считывается. */
+    flex-basis: 85%;
+  }
+
+  .reviews__nav {
+    justify-content: center;
+  }
+}

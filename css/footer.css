@@ -1,0 +1,152 @@
+/* ==========================================================================
+   footer.css — футер-карточка
+
+   У референса футер — такая же карточка --card-bg с радиусом 40, как
+   остальные блоки, а не полоса во всю ширину экрана.
+   ========================================================================== */
+
+.footer {
+  padding-bottom: var(--section-margin);
+}
+
+.footer__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) repeat(3, minmax(0, 1fr));
+  gap: var(--gap);
+}
+
+/* --------------------------------------------------------------------------
+   Левая колонка — бренд
+   -------------------------------------------------------------------------- */
+
+.footer__brand {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.footer__logo img {
+  width: 108px;
+  height: 40px;
+}
+
+.footer__about {
+  max-width: 32em;
+  color: var(--text-gray);
+  font-size: var(--fs-small);
+  line-height: 1.4;
+}
+
+.footer__mail {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-gray);
+  font-size: var(--fs-small);
+  word-break: break-word;
+}
+
+.footer__mail:hover {
+  color: var(--primary300);
+}
+
+.footer__tg {
+  margin-top: 4px;
+}
+
+/* --------------------------------------------------------------------------
+   Колонки ссылок
+   -------------------------------------------------------------------------- */
+
+.footer__col-title {
+  margin-bottom: 16px;
+  font-size: var(--fs-base);
+  font-weight: var(--fw-bold);
+}
+
+.footer__links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer__links a {
+  color: var(--text-gray);
+  font-size: var(--fs-small);
+}
+
+.footer__links a:hover {
+  color: var(--primary300);
+}
+
+.footer__cta {
+  margin-top: 20px;
+}
+
+/* --------------------------------------------------------------------------
+   Низ
+   -------------------------------------------------------------------------- */
+
+.footer__bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.footer__copy {
+  color: var(--text-gray);
+  font-size: var(--fs-small);
+}
+
+.footer__top {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--fs-small);
+  font-weight: var(--fw-medium);
+}
+
+.footer__top:hover {
+  color: var(--primary300);
+}
+
+/* Шеврон смотрит вниз — разворачиваем, ссылка ведёт наверх. */
+.footer__top-icon {
+  rotate: 180deg;
+  transition: translate var(--dur) var(--ease);
+}
+
+.footer__top:hover .footer__top-icon {
+  translate: 0 -3px;
+}
+
+@media (max-width: 1024px) {
+  .footer__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* Бренд занимает всю первую строку: рядом с колонкой ссылок его
+     описание сжималось бы в столбик по два слова. */
+  .footer__brand {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 576px) {
+  .footer__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer__bottom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .footer__cta,
+  .footer__tg {
+    width: 100%;
+    max-width: 100%;
+  }
+}

@@ -1,0 +1,221 @@
+/* ==========================================================================
+   form.css — форма заявки
+
+   Поля по образцу референса: radius 16, фокус не рамкой, а outline 2px
+   цветом --primary300 при прозрачном бордере. Так толщина обводки
+   не меняет размер поля и соседние элементы не дёргаются.
+   ========================================================================== */
+
+.lead__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 480px);
+  gap: var(--pad-card);
+  align-items: start;
+}
+
+/* --------------------------------------------------------------------------
+   Левая колонка — оффер
+   -------------------------------------------------------------------------- */
+
+.lead__title {
+  margin-bottom: var(--gap);
+}
+
+.lead__perks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: var(--gap);
+}
+
+.lead__perks .badge {
+  background-color: var(--main-bg);
+}
+
+.lead__note {
+  color: var(--text-color);
+  font-size: var(--fs-lead);
+  line-height: var(--lh-text);
+}
+
+.lead__disclaimer {
+  margin-top: 12px;
+  color: var(--text-gray);
+  font-size: var(--fs-small);
+  line-height: 1.4;
+}
+
+/* --------------------------------------------------------------------------
+   Правая колонка — поля
+   -------------------------------------------------------------------------- */
+
+.lead__form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: var(--gap);
+  border-radius: var(--radius-header);
+  background-color: var(--main-bg);
+  transition: background-color var(--dur) var(--ease);
+}
+
+.lead__field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.lead__label {
+  color: var(--text-gray);
+  font-size: var(--fs-small);
+}
+
+.lead__label span {
+  color: var(--error);
+}
+
+.form-input {
+  width: 100%;
+  padding: 16px;
+  border: 1px solid var(--input-border);
+  border-radius: var(--radius-input);
+  outline: 0;
+  background-color: var(--input-bg);
+  color: var(--input-text-active);
+  /* Ровно 16px, а не 14 из макета: iOS Safari принудительно зумит
+     страницу при фокусе в поле с кеглем меньше 16, и форма уезжает
+     за экран. Порог жёсткий — 15.9px уже зумит. */
+  font-size: 16px;
+  transition: background-color var(--dur) var(--ease),
+              border-color var(--dur) var(--ease),
+              outline-color var(--dur) var(--ease);
+}
+
+.form-input::placeholder {
+  color: var(--input-text);
+}
+
+.form-input:hover {
+  background-color: var(--input-bg-focus);
+}
+
+.form-input:focus {
+  border-color: transparent;
+  outline: 2px solid var(--input-border-focus);
+  background-color: var(--input-bg-focus);
+}
+
+.form-input.is-error {
+  border-color: transparent;
+  outline: 2px solid var(--error);
+}
+
+.lead__error {
+  color: var(--error);
+  font-size: var(--fs-xs);
+  line-height: 1.3;
+}
+
+.lead__error[hidden] {
+  display: none;
+}
+
+/* --------------------------------------------------------------------------
+   Чекбокс согласия
+   Родной input скрыт, но остаётся в потоке фокуса; рисуем свой квадрат.
+   -------------------------------------------------------------------------- */
+
+.lead__agree {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.lead__checkbox {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.lead__agree-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 22px;
+  height: 22px;
+  margin-top: 1px;
+  border: 1px solid var(--input-border);
+  border-radius: 6px;
+  background-color: var(--input-bg);
+  color: transparent;
+  transition: background-color var(--dur) var(--ease),
+              border-color var(--dur) var(--ease),
+              color var(--dur) var(--ease);
+}
+
+.lead__checkbox:checked + .lead__agree-box {
+  border-color: var(--primary300);
+  background-color: var(--primary300);
+  color: var(--white);
+}
+
+.lead__checkbox:focus-visible + .lead__agree-box {
+  outline: 2px solid var(--primary300);
+  outline-offset: 2px;
+}
+
+.lead__agree-text {
+  color: var(--text-gray);
+  font-size: var(--fs-xs);
+  line-height: 1.4;
+}
+
+.lead__link {
+  color: var(--text-color);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.lead__link:hover {
+  color: var(--primary300);
+}
+
+/* --------------------------------------------------------------------------
+   Кнопка и статус
+   -------------------------------------------------------------------------- */
+
+.lead__submit {
+  margin-top: 4px;
+}
+
+.lead__status {
+  padding: 12px 16px;
+  border-radius: var(--radius-btn);
+  font-size: var(--fs-small);
+  line-height: 1.3;
+  text-align: center;
+}
+
+.lead__status[hidden] {
+  display: none;
+}
+
+.lead__status--success {
+  background-color: rgba(66, 216, 25, .12);
+  color: var(--success);
+}
+
+.lead__status--error {
+  background-color: rgba(255, 83, 86, .12);
+  color: var(--error);
+}
+
+@media (max-width: 1024px) {
+  .lead__grid {
+    grid-template-columns: 1fr;
+  }
+}

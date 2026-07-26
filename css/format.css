@@ -1,0 +1,137 @@
+/* ==========================================================================
+   format.css — «Что тебя ждёт на онлайн-курсе»
+
+   Видео 16:9 и три шага формата обучения.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Плейсхолдер видео
+   TODO: заменить на ролик или эмбед, когда клиент пришлёт.
+   В первой версии здесь стоял серый прямоугольник #D7D7D7 — на тёмной теме
+   он выглядел бы дырой в макете, поэтому подложка из палитры.
+   -------------------------------------------------------------------------- */
+
+.format__video {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  /* Ширину ограничиваем: 16:9 во всю строку контейнера на 1920 даёт
+     кадр высотой 830px, и страница разрывается пустым прямоугольником. */
+  max-width: 1000px;
+  margin: 0 auto var(--gutter);
+  aspect-ratio: 16 / 9;
+  border-radius: var(--radius-card);
+  background-color: var(--card-bg);
+  background-image: radial-gradient(120% 90% at 50% 120%, rgba(83, 89, 255, .35), transparent 70%);
+  overflow: hidden;
+  transition: background-color var(--dur) var(--ease);
+}
+
+.format__play {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 88px;
+  height: 88px;
+  padding-left: 4px; /* оптическая компенсация: треугольник тяжелее слева */
+  border-radius: var(--radius-pill);
+  background-color: var(--white);
+  color: var(--black);
+  transition: transform var(--dur) var(--ease),
+              background-color var(--dur) var(--ease);
+}
+
+.format__play:hover,
+.format__play:focus-visible {
+  transform: scale(1.08);
+  background-color: var(--gray200);
+}
+
+.format__eq {
+  height: 24px;
+  color: var(--primary200);
+}
+
+.format__video-note {
+  color: var(--text-gray);
+  font-size: var(--fs-small);
+}
+
+/* --------------------------------------------------------------------------
+   Три шага
+   -------------------------------------------------------------------------- */
+
+.format__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--gutter);
+}
+
+.format__item {
+  display: flex;
+}
+
+.format__item .card__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: 100%;
+}
+
+.format__step {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-btn);
+  background-color: var(--main-bg);
+  color: var(--primary300);
+  font-size: var(--fs-base);
+  font-weight: var(--fw-bold);
+  font-variant-numeric: tabular-nums;
+  transition: background-color var(--dur) var(--ease);
+}
+
+.format__text {
+  font-size: var(--fs-lead);
+  line-height: var(--lh-text);
+}
+
+@media (max-width: 1024px) {
+  .format__play {
+    width: 64px;
+    height: 64px;
+  }
+
+  .format__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .format__item .card__inner {
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .format__step {
+    flex: 0 0 auto;
+  }
+}
+
+@media (max-width: 576px) {
+  .format__play {
+    width: 56px;
+    height: 56px;
+  }
+
+  /* На узком экране подпись и эквалайзер под кнопкой воспроизведения
+     съедают почти всю высоту кадра 16:9 — оставляем только кнопку. */
+  .format__eq,
+  .format__video-note {
+    display: none;
+  }
+}

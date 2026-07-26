@@ -1,0 +1,63 @@
+/* ==========================================================================
+   cta.css — градиентные CTA-полосы между блоками
+
+   Приём референса: широкая карточка на градиенте, текст слева, кнопка справа.
+   Две штуки на странице, градиенты разные — чтобы вторая не читалась
+   повтором первой.
+   ========================================================================== */
+
+.cta__banner {
+  /* Дрейф градиента на такте: полоса «дышит», но не отвлекает от текста. */
+  background-size: 200% 100%;
+  animation: gradient-pan calc(var(--bar) * 10) ease-in-out infinite alternate;
+}
+
+/* Вторая полоса — фиолетовый градиент сертификата с референса. */
+.banner--cert {
+  background-image: var(--gradient-cert);
+}
+
+.cta__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gap);
+}
+
+.cta__text {
+  max-width: 56%;
+  font-size: var(--fs-h4);
+  font-weight: var(--fw-medium);
+  line-height: var(--lh-text);
+}
+
+.cta__btn {
+  flex: 0 0 auto;
+}
+
+@media (max-width: 1024px) {
+  .cta__inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .cta__text {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .cta__banner {
+    text-align: center;
+  }
+
+  .cta__inner {
+    align-items: stretch;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cta__banner {
+    animation: none;
+  }
+}

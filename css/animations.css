@@ -1,0 +1,344 @@
+/* ==========================================================================
+   animations.css — моушен-система
+
+   Два слоя, и это принципиально:
+
+   1. Слой UI  — всё, что отвечает на действие пользователя. Живёт на
+      --ease / --dur, снятых с референса. Описан прямо в компонентах.
+   2. Слой ритма — всё фоновое и декоративное. Длительности кратны --beat
+      (128 BPM). Общий делитель — то, ради чего это сделано: страница
+      читается как один живой организм, а не как набор случайных твинов.
+
+   Любая новая анимация обязана лечь в один из слоёв и обязана глушиться
+   в prefers-reduced-motion — блок в самом низу файла.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Появление блоков при скролле
+   Классы вешает js/main.js через IntersectionObserver, одноразово.
+   Стартовое состояние ставится только если у документа есть класс js —
+   иначе при выключенном JS вся страница осталась бы невидимой.
+   -------------------------------------------------------------------------- */
+
+.js .reveal {
+  opacity: 0;
+  translate: 0 24px;
+  transition: opacity var(--dur) var(--ease),
+              translate var(--dur) var(--ease);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.js .reveal.is-visible {
+  opacity: 1;
+  translate: 0 0;
+}
+
+/* --------------------------------------------------------------------------
+   Прогресс скролла — «плейхед» вверху страницы
+   Ширину задаёт main.js через --scroll-progress (0…1).
+   -------------------------------------------------------------------------- */
+
+.playhead {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 1000;
+  height: 3px;
+  background-image: var(--gradient-promo);
+  transform: scaleX(var(--scroll-progress, 0));
+  transform-origin: left center;
+  pointer-events: none;
+}
+
+/* --------------------------------------------------------------------------
+   Эквалайзер — 5 полосок в ритме бита
+   -------------------------------------------------------------------------- */
+
+.eq {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 20px;
+}
+
+.eq__bar {
+  width: 3px;
+  height: 100%;
+  border-radius: var(--radius-pill);
+  background-color: currentColor;
+  transform-origin: bottom center;
+  animation: eq-bounce var(--beat) var(--ease) infinite alternate;
+}
+
+/* Сдвиг фазы: без него пять полосок скачут синхронно и выглядят
+   как одна широкая, а не как эквалайзер. */
+.eq__bar:nth-child(1) { animation-delay: calc(var(--beat) * -0.10); }
+.eq__bar:nth-child(2) { animation-delay: calc(var(--beat) * -0.45); }
+.eq__bar:nth-child(3) { animation-delay: calc(var(--beat) * -0.75); }
+.eq__bar:nth-child(4) { animation-delay: calc(var(--beat) * -0.25); }
+.eq__bar:nth-child(5) { animation-delay: calc(var(--beat) * -0.60); }
+
+@keyframes eq-bounce {
+  from { transform: scaleY(.25); }
+  to   { transform: scaleY(1); }
+}
+
+/* --------------------------------------------------------------------------
+   Пульсирующая точка — индикатор «набор идёт прямо сейчас»
+   -------------------------------------------------------------------------- */
+
+.dot {
+  position: relative;
+  display: inline-flex;
+  flex: 0 0 auto;
+  width: 10px;
+  height: 10px;
+  border-radius: var(--radius-pill);
+  background-color: var(--success);
+}
+
+.dot::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-color: inherit;
+  animation: dot-pulse var(--bar) var(--ease) infinite;
+}
+
+@keyframes dot-pulse {
+  0%   { transform: scale(1);   opacity: .7; }
+  70%  { transform: scale(2.6); opacity: 0; }
+  100% { transform: scale(2.6); opacity: 0; }
+}
+
+/* --------------------------------------------------------------------------
+   Бегущая строка
+   Лента дублируется в разметке, поэтому сдвиг ровно на -50% зациклен без шва.
+   -------------------------------------------------------------------------- */
+
+.marquee {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  /* Края растворяются, чтобы строка не обрубалась о границу экрана. */
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+.marquee__track {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: var(--marquee-gap, 40px);
+  padding-right: var(--marquee-gap, 40px);
+  animation: marquee-scroll var(--marquee-dur, calc(var(--bar) * 16)) linear infinite;
+}
+
+.marquee:hover .marquee__track {
+  animation-play-state: paused;
+}
+
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* --------------------------------------------------------------------------
+   Живой градиент и blur-пятна в hero
+   -------------------------------------------------------------------------- */
+
+.aurora {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.aurora__blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: .55;
+  will-change: transform;
+}
+
+.aurora__blob--one {
+  width: 46%;
+  aspect-ratio: 1;
+  top: -18%;
+  left: -8%;
+  background-color: var(--primary300);
+  animation: blob-drift calc(var(--bar) * 8) ease-in-out infinite alternate;
+}
+
+.aurora__blob--two {
+  width: 38%;
+  aspect-ratio: 1;
+  right: -6%;
+  bottom: -22%;
+  background-color: #AA48FF;
+  animation: blob-drift calc(var(--bar) * 11) ease-in-out infinite alternate-reverse;
+}
+
+@keyframes blob-drift {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to   { transform: translate3d(12%, 8%, 0) scale(1.18); }
+}
+
+/* Медленный дрейф самого градиента подложки. */
+.gradient-drift {
+  background-size: 200% 100%;
+  animation: gradient-pan calc(var(--bar) * 8) ease-in-out infinite alternate;
+}
+
+@keyframes gradient-pan {
+  from { background-position: 0% 50%; }
+  to   { background-position: 100% 50%; }
+}
+
+/* --------------------------------------------------------------------------
+   Блик под курсором
+   Координаты пишет main.js в --mx / --my. Только там, где курсор существует.
+   -------------------------------------------------------------------------- */
+
+@media (hover: hover) and (pointer: fine) {
+  .glow::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    opacity: 0;
+    background: radial-gradient(
+      260px circle at var(--mx, 50%) var(--my, 50%),
+      var(--glow-color),
+      transparent 70%
+    );
+    transition: opacity var(--dur) var(--ease);
+    pointer-events: none;
+  }
+
+  .glow:hover::before {
+    opacity: 1;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Зачёркивание старой цены
+   Линия растёт слева направо, когда блок попал во вьюпорт.
+   -------------------------------------------------------------------------- */
+
+.strike {
+  position: relative;
+  display: inline-block;
+}
+
+.strike::after {
+  content: '';
+  position: absolute;
+  left: -4%;
+  right: -4%;
+  top: 50%;
+  height: 4px;
+  border-radius: var(--radius-pill);
+  background-color: var(--error);
+  transform: scaleX(0) rotate(-5deg);
+  transform-origin: left center;
+  transition: transform var(--beat) var(--ease);
+}
+
+.strike.is-visible::after {
+  transform: scaleX(1) rotate(-5deg);
+}
+
+/* --------------------------------------------------------------------------
+   Плавное раскрытие аккордеона
+   grid-template-rows 0fr → 1fr анимирует высоту без замера в JS
+   и без «прыжка» на auto.
+   -------------------------------------------------------------------------- */
+
+.collapse {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--dur) var(--ease);
+}
+
+.collapse.is-open {
+  grid-template-rows: 1fr;
+}
+
+/* ⚠️ У .collapse__inner не должно быть ни padding, ни border, ни margin.
+   Строка грида схлопывается до нулевой ВЫСОТЫ КОНТЕНТА, а padding лежит
+   вне content-box — элемент остаётся высотой в этот padding, и overflow
+   режет текст ровно по нему: в свёрнутом состоянии видна половина строки.
+   Внутренние отступы задавать содержимому (.faq__answer, .program__module-text). */
+.collapse__inner {
+  overflow: hidden;
+  min-height: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Шеврон аккордеона
+   -------------------------------------------------------------------------- */
+
+.chevron {
+  flex: 0 0 auto;
+  transition: rotate var(--dur) var(--ease);
+}
+
+.chevron.is-open,
+[aria-expanded='true'] .chevron {
+  rotate: 180deg;
+}
+
+/* --------------------------------------------------------------------------
+   Уважение к системной настройке
+   Ритмический слой гасим целиком, от UI-слоя оставляем только цвет:
+   мгновенная смена фона выглядит нормально, а прыжки геометрии — нет.
+   -------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .eq__bar,
+  .dot::after,
+  .marquee__track,
+  .aurora__blob,
+  .gradient-drift {
+    animation: none !important;
+  }
+
+  /* Эквалайзер без анимации не должен остаться обрубками разной высоты. */
+  .eq__bar {
+    transform: scaleY(.6);
+  }
+
+  .js .reveal {
+    opacity: 1;
+    translate: none;
+    transition: none;
+  }
+
+  .strike::after {
+    transform: scaleX(1) rotate(-5deg);
+    transition: none;
+  }
+
+  .glow::before {
+    display: none;
+  }
+
+  .playhead {
+    display: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

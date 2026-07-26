@@ -1,0 +1,415 @@
+/* ==========================================================================
+   layout.css — контейнер, ритм секций и общие компоненты
+
+   Это перенос компонентной библиотеки референса: карточка, кнопка, пилюля,
+   бейдж, заголовок секции, слайдерная стрелка. Блоки дальше используют их
+   как есть и добавляют только свои модификаторы.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Контейнер и ритм секций
+   -------------------------------------------------------------------------- */
+
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--page-gap);
+}
+
+.section {
+  position: relative;
+  margin-bottom: var(--section-margin);
+}
+
+/* Между блоком и его продолжением (CTA под слайдером, сноска под формой)
+   ставим короткий шаг вместо полного. */
+.section--tight {
+  margin-bottom: var(--section-margin-sm);
+}
+
+/* Шапка секции: заголовок слева, серый пояснительный текст справа.
+   У референса это две равные колонки — не «заголовок + узкая приписка». */
+.section__head {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--gap);
+  margin-bottom: var(--gap);
+}
+
+.section__head--single {
+  grid-template-columns: 1fr;
+}
+
+.section__title {
+  font-size: var(--fs-h2);
+}
+
+.section__text {
+  color: var(--text-gray);
+  font-size: var(--fs-lead);
+  line-height: var(--lh-text);
+}
+
+.section__text--normal {
+  color: var(--text-color);
+}
+
+/* Ряд карточек. Колонки задаёт каждый блок сам, зазор общий. */
+.section__grid {
+  display: grid;
+  gap: var(--gutter);
+}
+
+.section__footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: var(--gap);
+}
+
+/* --------------------------------------------------------------------------
+   Карточка
+   -------------------------------------------------------------------------- */
+
+.card {
+  position: relative;
+  height: 100%;
+  border-radius: var(--radius-card);
+  background-color: var(--card-bg);
+  overflow: hidden;
+  transition: background-color var(--dur) var(--ease),
+              translate var(--dur) var(--ease);
+}
+
+.card--padding {
+  padding: var(--pad-card);
+}
+
+/* Подъём на ховере — подпись референса. На ≤1024 --card-translate равен 0,
+   поэтому правило просто перестаёт что-либо двигать. */
+.card--hover:hover,
+.card--hover:focus-within {
+  translate: 0 calc(var(--card-translate) * -1);
+}
+
+.card__title {
+  margin: 0 0 var(--gap) 0;
+  font-size: var(--fs-h3);
+}
+
+.card__title--sm {
+  font-size: var(--fs-h4);
+  font-weight: var(--fw-bold);
+}
+
+.card__text {
+  color: var(--text-gray);
+  font-size: var(--fs-lead);
+  line-height: var(--lh-text);
+}
+
+/* Контент поверх декоративных слоёв карточки (блик, картинка). */
+.card__inner {
+  position: relative;
+  z-index: 1;
+}
+
+/* --------------------------------------------------------------------------
+   Кнопки
+   -------------------------------------------------------------------------- */
+
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  max-width: max-content;
+  padding: 16px 24px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-btn);
+  font-size: var(--fs-base);
+  font-weight: var(--fw-medium);
+  line-height: 1.2;
+  text-align: center;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color var(--dur) var(--ease),
+              border-color var(--dur) var(--ease),
+              color var(--dur) var(--ease);
+}
+
+.btn-sm {
+  padding: 12px 24px;
+}
+
+.btn-lg {
+  padding: 24px 32px;
+  border-radius: var(--radius-btn-lg);
+  font-size: var(--fs-btn-lg);
+}
+
+.btn-block {
+  max-width: 100%;
+  width: 100%;
+  /* Кнопке во всю ширину nowrap не нужен, а вредит: длинная подпись
+     («Оплатить «БАЗУ» + «Погружение»») становится min-content колонки
+     и распирает грид шире экрана. На 375 из-за этого блок «Программа»
+     вылезал за правый край на 20px. */
+  white-space: normal;
+}
+
+.btn-primary {
+  background-color: var(--primary300);
+  color: var(--white);
+}
+
+.btn-primary:hover,
+.btn-primary:focus-visible,
+.btn-primary:active {
+  background-color: var(--primary200);
+}
+
+/* Белая кнопка на градиентном баннере: у референса это «JOIN» в hero. */
+.btn-white {
+  background-color: var(--white);
+  color: var(--black);
+}
+
+.btn-white:hover,
+.btn-white:focus-visible,
+.btn-white:active {
+  background-color: var(--gray200);
+}
+
+/* Кнопка «как карточка» — на фоне страницы, с бордером. */
+.btn-card {
+  border-color: var(--border-color);
+  background-color: var(--card-bg);
+  color: var(--text-color);
+}
+
+.btn-card:hover,
+.btn-card:focus-visible,
+.btn-card:active {
+  background-color: var(--btn-card-hover);
+}
+
+.btn-success {
+  background-color: var(--success);
+  color: var(--white);
+}
+
+.btn-success:hover,
+.btn-success:focus-visible,
+.btn-success:active {
+  background-color: var(--backgroundDark);
+}
+
+.btn[disabled],
+.btn[aria-disabled='true'] {
+  opacity: .5;
+  pointer-events: none;
+}
+
+/* Стрелка внутри кнопки уезжает вправо на ховере — тот же приём,
+   что у бейджей-шевронов на референсе. */
+.btn__arrow {
+  display: flex;
+  transition: translate var(--dur) var(--ease);
+}
+
+.btn:hover .btn__arrow,
+.btn:focus-visible .btn__arrow {
+  translate: 4px 0;
+}
+
+/* Круглая стрелка слайдера — 48×48 на фоне карточки. */
+.slider-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  aspect-ratio: 1;
+  border-radius: var(--radius-pill);
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  transition: background-color var(--dur) var(--ease),
+              opacity var(--dur) var(--ease);
+}
+
+.slider-btn:hover,
+.slider-btn:focus-visible {
+  background-color: var(--card-bg-hover);
+}
+
+.slider-btn[disabled] {
+  opacity: .4;
+  cursor: default;
+}
+
+/* --------------------------------------------------------------------------
+   Пилюли и бейджи
+   -------------------------------------------------------------------------- */
+
+/* Пилюля-таб: прямоугольная со скруглением 16, а не капсула.
+   Именно так выглядят фильтры жанров и табы на референсе. */
+.pill {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border: 1px solid var(--pill-border);
+  border-radius: var(--radius-btn);
+  background-color: var(--pill-bg);
+  color: var(--pill-text);
+  font-size: var(--fs-lead);
+  font-weight: var(--fw-medium);
+  cursor: pointer;
+  transition: background-color var(--dur) var(--ease),
+              border-color var(--dur) var(--ease),
+              color var(--dur) var(--ease);
+}
+
+.pill:hover {
+  border-color: var(--pill-border-hover);
+  background-color: var(--pill-bg-hover);
+  color: var(--pill-text-active);
+}
+
+.pill.is-active,
+.pill[aria-selected='true'] {
+  border-color: var(--pill-border-hover);
+  background-color: var(--pill-bg-hover);
+  color: var(--pill-text-active);
+}
+
+/* Бейдж-капсула с иконкой: регалии автора, список «что входит». */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  max-width: max-content;
+  padding: 12px 16px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-pill);
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  font-size: var(--fs-small);
+  line-height: 1.2;
+  transition: background-color var(--dur) var(--ease),
+              color var(--dur) var(--ease);
+}
+
+.badge__icon {
+  display: flex;
+  flex: 0 0 auto;
+  color: var(--primary300);
+}
+
+.badge__icon--success {
+  color: var(--success);
+}
+
+a.badge:hover,
+button.badge:hover {
+  background-color: var(--btn-card-hover);
+}
+
+/* Мелкий солид-бейдж: выгода у тарифа, метка «хит». */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  background-color: var(--success);
+  color: var(--white);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-medium);
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.tag--error {
+  background-color: var(--error);
+}
+
+.tag--primary {
+  background-color: var(--primary300);
+}
+
+/* --------------------------------------------------------------------------
+   Градиентный баннер (hero и CTA-полосы)
+   -------------------------------------------------------------------------- */
+
+.banner {
+  position: relative;
+  padding: var(--pad-card);
+  border-radius: var(--radius-card);
+  background-color: var(--primary300);
+  background-image: var(--gradient-promo);
+  color: var(--banner-text);
+  overflow: hidden;
+}
+
+.banner__inner {
+  position: relative;
+  z-index: 1;
+}
+
+.banner__title {
+  color: var(--banner-text);
+}
+
+/* --------------------------------------------------------------------------
+   Разделитель
+   -------------------------------------------------------------------------- */
+
+.divider {
+  height: 1px;
+  border: none;
+  margin: var(--gap) 0;
+  background-color: var(--border-color);
+}
+
+/* --------------------------------------------------------------------------
+   Адаптив общих компонентов
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 1600px) {
+  .btn-lg {
+    padding: 16px 24px;
+  }
+}
+
+@media (max-width: 1024px) {
+  /* Заголовок и пояснение перестают быть двумя колонками. */
+  .section__head {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .badge {
+    font-size: var(--fs-xs);
+    padding: 10px 14px;
+    gap: 8px;
+  }
+}
+
+@media (max-width: 768px) {
+  /* На телефоне кнопка почти всегда во всю ширину: так её проще нажать
+     и она перестаёт «плавать» по центру блока. */
+  .btn-lg {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .pill {
+    font-size: var(--fs-small);
+    padding: 12px 16px;
+  }
+}

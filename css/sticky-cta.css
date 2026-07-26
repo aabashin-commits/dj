@@ -1,0 +1,92 @@
+/* ==========================================================================
+   sticky-cta.css — липкая панель заявки на мобильных и планшетах
+
+   Появляется с ≤1024, а не с ≤768: именно на 1024 из шапки уходят якоря
+   и кнопка «Запись на обучение», и без панели на планшете не остаётся
+   ни одного видимого CTA.
+
+   Показ и скрытие переключает js/main.js — панель прячется, пока виден
+   первый экран, и у формы с футером, чтобы не перекрывать кнопку отправки.
+   ========================================================================== */
+
+.sticky-cta {
+  display: none;
+}
+
+@media (max-width: 1024px) {
+  .sticky-cta {
+    position: fixed;
+    z-index: 980;
+    right: var(--page-gap);
+    bottom: var(--page-gap);
+    left: var(--page-gap);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 12px 12px 12px 20px;
+    /* Полоса жеста на iPhone перекрыла бы нижний край панели. */
+    padding-bottom: max(12px, env(safe-area-inset-bottom));
+    border: 1px solid var(--header-border);
+    border-radius: var(--radius-header);
+    background-color: var(--header-bg);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, .25);
+    translate: 0 0;
+    opacity: 1;
+    transition: translate var(--dur) var(--ease),
+                opacity var(--dur) var(--ease),
+                background-color var(--dur) var(--ease);
+  }
+
+  .sticky-cta[hidden] {
+    /* Ставим display вручную: атрибут hidden скрыл бы панель мгновенно,
+       а нам нужен выезд. Скрытие делает класс is-hidden. */
+    display: flex;
+  }
+
+  .sticky-cta[hidden],
+  .sticky-cta.is-hidden {
+    translate: 0 calc(100% + var(--page-gap));
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .sticky-cta__price {
+    font-size: var(--fs-base);
+    font-weight: var(--fw-bold);
+    line-height: 1.1;
+    white-space: nowrap;
+  }
+
+  .sticky-cta__timer {
+    margin-top: 2px;
+    color: var(--text-gray);
+    font-size: var(--fs-xs);
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .sticky-cta__timer:empty {
+    display: none;
+  }
+
+  .sticky-cta__btn {
+    flex: 0 0 auto;
+  }
+
+  /* Запас под панель, иначе она накрывает низ футера. */
+  body {
+    padding-bottom: 96px;
+  }
+}
+
+@media (max-width: 380px) {
+  .sticky-cta {
+    padding-left: 14px;
+    gap: 10px;
+  }
+
+  .sticky-cta__btn {
+    padding-inline: 16px;
+  }
+}
