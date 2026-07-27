@@ -12,28 +12,35 @@
 
 .author__grid {
   display: grid;
-  grid-template-columns: minmax(0, 380px) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 300px) minmax(0, 1fr);
   gap: var(--pad-card);
-  align-items: start;
+  align-items: stretch;
 }
 
 /* --------------------------------------------------------------------------
    Фото
+
+   Кадр вертикальный, ростовой (800×1200). Пропорцию ему не задаём:
+   колонка тянется на всю высоту карточки, поэтому высоту диктует соседняя
+   колонка с регалиями — справа от портрета не остаётся пустоты, сколько бы
+   строк ни занимали бейджи. min-height — это пол: без него на широких
+   экранах, где регалии укладываются в две строки, портрет сплющило бы
+   в горизонтальную полоску.
    -------------------------------------------------------------------------- */
 
 .author__media {
   border-radius: var(--radius-header);
   overflow: hidden;
-  aspect-ratio: 3 / 2;
+  min-height: 420px;
 }
 
 .author__photo {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  /* Кадр горизонтальный и человек в нём смещён влево — держим фокус
-     на лице, а не на центре кадра. */
-  object-position: 40% center;
+  /* Съёмка сверху: голова в верхней трети кадра. Смещаем точку обрезки
+     вверх, чтобы лишнее уходило от пола, а не от лица. */
+  object-position: center 20%;
 }
 
 /* --------------------------------------------------------------------------
@@ -47,11 +54,40 @@
   margin-bottom: var(--gap);
 }
 
+/* Высоту плитки задаёт самый длинный сосед по ряду («лучших треков года
+   на Beatport» в две строки). Короткие подписи из-за этого висели вверху
+   с пустотой снизу — колоночный флекс с justify-content центрирует
+   содержимое по вертикали, и ряд выглядит ровным. */
 .author__stat {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   padding: 20px;
   border-radius: var(--radius-btn);
   background-color: var(--main-bg);
   transition: background-color var(--dur) var(--ease);
+}
+
+/* «8 лет живёт в Дубае» и «3 победы в DJ-баттлах» читаются одной фразой,
+   поэтому цифра и подпись стоят в строку. У «топ-50» подпись вчетверо
+   длиннее — там разбивка на две строки остаётся.
+
+   Два выравнивания по вертикали работают на разных уровнях и не мешают
+   друг другу: align-items центрирует подпись относительно высоты цифры,
+   а align-content — всю строку внутри плитки, высоту которой задаёт сосед
+   по ряду. Второе требует flex-wrap: без переноса строка не считается
+   настоящей flex-линией и align-content игнорируется. */
+.author__stat--inline {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  align-content: center;
+  justify-content: flex-start;
+  gap: 12px;
+}
+
+.author__stat--inline .author__stat-num {
+  margin-bottom: 0;
 }
 
 .author__stat-num {
@@ -75,21 +111,33 @@
    Регалии бейджами
    -------------------------------------------------------------------------- */
 
+/* Не флекс-облако по ширине текста, а та же сетка, что у счётчиков:
+   три равные колонки и тот же --gutter. Бейджи перестают быть разной
+   ширины, ряды выравниваются по краям — блок читается одной таблицей
+   из шести одинаковых плиток, а не двумя разными списками. */
 .author__badges {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--gutter);
 }
 
-/* Бейджи лежат на карточке, а не на фоне страницы, поэтому подложка
-   у них другая — иначе они слились бы с --card-bg. */
+/* Дальше — полное повторение .author__stat: подложка, радиус и внутренний
+   отступ те же. max-width снимаем: у базового .badge стоит max-content,
+   из-за него плитка обнимала бы текст вместо того, чтобы занять ячейку.
+   align-items: center — то же центрирование по вертикали, что у счётчиков:
+   короткие регалии не липнут к верхнему краю ячейки, растянутой соседом. */
 .author__badges .badge {
+  max-width: none;
+  align-items: center;
+  padding: 20px;
+  border: none;
+  border-radius: var(--radius-btn);
   background-color: var(--main-bg);
 }
 
 @media (max-width: 1280px) {
   .author__grid {
-    grid-template-columns: minmax(0, 320px) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 260px) minmax(0, 1fr);
   }
 }
 
@@ -98,21 +146,39 @@
     grid-template-columns: 1fr;
   }
 
+  /* В одну колонку высоту фото задавать больше некому: соседней колонки
+     рядом нет, и растяжка превратилась бы в полосу во всю ширину карточки.
+     Возвращаем пропорцию исходного кадра и ограничиваем ширину. */
   .author__media {
-    max-width: 480px;
+    min-height: 0;
+    aspect-ratio: 2 / 3;
+    max-width: 300px;
+  }
+
+  /* Регалии длиннее подписей счётчиков: в трёх колонках на планшете
+     «Совместки с HUGEL, Joezi…» рассыпаются на четыре строки. Даём им
+     по половине ширины. */
+  .author__badges {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (max-width: 576px) {
   /* Три колонки на 360px дают по 100px на счётчик — подпись рассыпается
      на пять строк. Разворачиваем в одну колонку. */
-  .author__stats {
+  .author__stats,
+  .author__badges {
     grid-template-columns: 1fr;
   }
 
+  /* flex-direction обязателен: базовое правило ставит column, и без явного
+     row подпись осталась бы под цифрой вместо строки. Выравнивание —
+     по центру цифры, как на широких экранах. */
   .author__stat {
     display: flex;
-    align-items: baseline;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
     gap: 12px;
     padding: 14px 16px;
   }
