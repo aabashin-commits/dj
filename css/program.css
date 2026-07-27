@@ -142,6 +142,43 @@
   font-weight: var(--fw-bold);
 }
 
+/* Разбор модуля по урокам. Отступы — на самом списке, а не на
+   .collapse__inner: см. предупреждение в animations.css. */
+.program__lessons {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 0 20px 16px;
+}
+
+.program__lesson-name {
+  color: var(--text-color);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-bold);
+  line-height: 1.3;
+}
+
+.program__lesson-text {
+  color: var(--text-gray);
+  font-size: var(--fs-small);
+  line-height: 1.4;
+}
+
+/* Отступ только когда у урока есть заголовок: в бонусном модуле часть
+   пунктов состоит из одного абзаца, и лишние 4px там сбивали бы шаг списка. */
+.program__lesson-name + .program__lesson-text {
+  margin-top: 4px;
+}
+
+/* Домашки и бонусы — вехи между уроками, а не уроки. Капсулой, чтобы
+   в длинном списке было видно ритм: где смотришь, а где уже делаешь. */
+.program__lesson--mark {
+  /* Метка прижата влево и по высоте контента: li — флекс-элемент колонки
+     и без этого растянулся бы во всю ширину. */
+  display: flex;
+  align-items: center;
+}
+
 /* --------------------------------------------------------------------------
    Блок с ценой
    -------------------------------------------------------------------------- */
@@ -252,7 +289,8 @@
     padding: 14px 16px;
   }
 
-  .program__module-text {
+  .program__module-text,
+  .program__lessons {
     padding: 0 16px 14px;
   }
 }
