@@ -125,8 +125,13 @@
     box.hidden = true;
     unlockScroll();
     /* Фокус возвращаем на плитку, с которой открыли, — иначе он улетает
-       в начало документа и навигация с клавиатуры начинается заново. */
-    if (opener && typeof opener.focus === 'function') opener.focus();
+       в начало документа и навигация с клавиатуры начинается заново.
+       preventScroll обязателен: плитка может уходить под обрез свёрнутой
+       ленты, и браузер полез бы доскроливать её до видимости, ломая
+       раскладку (подробности — в комментарии к .reviews__grid). */
+    if (opener && typeof opener.focus === 'function') {
+      opener.focus({ preventScroll: true });
+    }
     opener = null;
   }
 
