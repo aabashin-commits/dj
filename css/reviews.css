@@ -1,112 +1,267 @@
 /* ==========================================================================
-   reviews.css — слайдер отзывов
+   reviews.css — стена отзывов и лайтбокс
 
-   Прокрутка — родной scroll-snap, без библиотек. Стрелки только управляют
-   scrollLeft, поэтому свайп на телефоне работает сам собой.
+   Отзывы — это скриншоты переписки: текст запечён в пиксели. Отсюда вся
+   конструкция блока:
+
+   1. Кадрировать нельзя — object-fit: cover срежет слова. Только натуральная
+      высота, поэтому кладка, а не ровная сетка.
+   2. Читать в сетке нельзя. Замер: при 3 колонках в контейнере 1472 колонка
+      выходит 485px, и текст самого плотного скриншота падает до ~10px.
+      Чтобы он стал комфортным (16px), нужны 2 колонки — но тогда секция
+      вырастает до 3000px. Компромисса нет, поэтому сетка работает как
+      «стена доказательств», а читают в лайтбоксе при полном размере.
    ========================================================================== */
 
-.reviews__viewport {
-  display: flex;
-  gap: var(--gutter);
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  /* Полосу прокрутки прячем: под лентой стоят стрелки, и системный
-     скроллбар только шумит. */
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  /* Резинку гасим, чтобы страница под лентой не уезжала вбок. */
-  overscroll-behavior-x: contain;
+/* --------------------------------------------------------------------------
+   Кладка
+   -------------------------------------------------------------------------- */
+
+.reviews__grid {
+  position: relative;
+  /* Свёрнутая высота. Показывает примерно две плитки в каждой колонке —
+     видно, что отзывов много, но секция не съедает три экрана. */
+  max-height: 620px;
+  overflow: hidden;
+  transition: max-height var(--dur) var(--ease);
 }
 
-.reviews__viewport::-webkit-scrollbar {
-  display: none;
+.reviews__grid.is-expanded {
+  max-height: none;
 }
 
-.reviews__card {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  flex: 0 0 calc((100% - var(--gutter) * 2) / 3);
-  scroll-snap-align: start;
+.reviews__masonry {
+  column-count: 3;
+  column-gap: var(--gutter);
 }
 
-.reviews__head {
+.reviews__item {
+  /* Без этого плитка рвётся между колонками пополам. */
+  break-inside: avoid;
+  -webkit-column-break-inside: avoid;
+  margin-bottom: var(--gutter);
+}
+
+.reviews__shot {
+  position: relative;
+  display: block;
+  width: 100%;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-header);
+  background-color: var(--card-bg);
+  overflow: hidden;
+  cursor: zoom-in;
+  transition: border-color var(--dur) var(--ease),
+              translate var(--dur) var(--ease);
+}
+
+.reviews__shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.reviews__shot:hover,
+.reviews__shot:focus-visible {
+  border-color: var(--primary300);
+  translate: 0 calc(var(--card-translate) * -0.5);
+}
+
+/* Значок «развернуть» — подсказка, что скриншот кликабелен.
+   Появляется на ховере, на тач-устройствах показан всегда: там ховера нет,
+   и иначе о возможности открыть отзыв никто не догадается. */
+.reviews__zoom {
+  position: absolute;
+  top: 12px;
+  right: 12px;
   display: flex;
   align-items: center;
-  gap: 16px;
-}
-
-.reviews__avatar {
-  flex: 0 0 auto;
-  width: 72px;
-  height: 72px;
-  aspect-ratio: 1;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
   border-radius: var(--radius-pill);
-  object-fit: cover;
+  background-color: var(--blackOverlay);
+  backdrop-filter: blur(6px);
+  color: var(--white);
+  opacity: 0;
+  transition: opacity var(--dur) var(--ease);
 }
 
-.reviews__name {
-  font-size: var(--fs-h4);
-  font-weight: var(--fw-bold);
+.reviews__shot:hover .reviews__zoom,
+.reviews__shot:focus-visible .reviews__zoom {
+  opacity: 1;
 }
 
-.reviews__nick {
-  margin-top: 2px;
-  color: var(--text-gray);
-  font-size: var(--fs-small);
+@media (hover: none) {
+  .reviews__zoom {
+    opacity: 1;
+  }
 }
 
-.reviews__rating {
-  display: flex;
-  gap: 4px;
-  color: var(--warning);
+/* Растворение нижнего края — сигнал, что лента продолжается. */
+.reviews__fade {
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 160px;
+  background: linear-gradient(to bottom, transparent, var(--main-bg));
+  pointer-events: none;
+  transition: opacity var(--dur) var(--ease);
 }
 
-.reviews__rating li {
-  display: flex;
+.reviews__grid.is-expanded .reviews__fade {
+  opacity: 0;
 }
 
-.reviews__text {
-  color: var(--text-color);
-  font-size: var(--fs-lead);
-  line-height: var(--lh-text);
+.reviews__toggle .chevron {
+  transition: rotate var(--dur) var(--ease);
+}
+
+.reviews__toggle[aria-expanded='true'] .chevron {
+  rotate: 180deg;
 }
 
 /* --------------------------------------------------------------------------
-   Стрелки
+   Лайтбокс
    -------------------------------------------------------------------------- */
 
-.reviews__nav {
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 1100;
   display: flex;
-  justify-content: flex-end;
-  gap: 12px;
-  margin-top: var(--gap);
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
 }
 
-/* Шеврон из спрайта смотрит вниз — доворачиваем его в стороны,
-   чтобы не заводить в спрайт ещё две почти одинаковые иконки. */
-.reviews__chevron--prev {
+.lightbox[hidden] {
+  display: none;
+}
+
+.lightbox__backdrop {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, .82);
+  backdrop-filter: blur(4px);
+}
+
+.lightbox__body {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.lightbox__img {
+  /* Полный размер, но в пределах экрана: скриншоты до 1290px шириной,
+     на ноутбуке они иначе не поместились бы целиком. */
+  max-width: min(1100px, 92vw);
+  max-height: 84vh;
+  width: auto;
+  height: auto;
+  border-radius: var(--radius-header);
+  background-color: var(--dark400);
+}
+
+.lightbox__btn {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-pill);
+  background-color: rgba(255, 255, 255, .12);
+  backdrop-filter: blur(8px);
+  color: var(--white);
+  transition: background-color var(--dur) var(--ease);
+}
+
+.lightbox__btn:hover,
+.lightbox__btn:focus-visible {
+  background-color: rgba(255, 255, 255, .24);
+}
+
+.lightbox__btn--close {
+  top: -60px;
+  right: 0;
+}
+
+/* Стрелки выносим за пределы картинки, чтобы они не перекрывали текст
+   отзыва — а его тут и надо читать. */
+.lightbox__btn--prev {
+  top: 50%;
+  left: -64px;
+  translate: 0 -50%;
   rotate: 90deg;
 }
 
-.reviews__chevron--next {
+.lightbox__btn--next {
+  top: 50%;
+  right: -64px;
+  translate: 0 -50%;
   rotate: -90deg;
 }
 
+.lightbox__counter {
+  position: absolute;
+  bottom: -44px;
+  left: 50%;
+  translate: -50% 0;
+  color: var(--gray400);
+  font-size: var(--fs-small);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* --------------------------------------------------------------------------
+   Адаптив
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 1440px) {
+  /* Места под вынесенные стрелки уже нет — возвращаем их на картинку,
+     но прижимаем к краям, где текста обычно нет. */
+  .lightbox__btn--prev { left: 8px; }
+  .lightbox__btn--next { right: 8px; }
+  .lightbox__btn--close { top: 8px; right: 8px; }
+  .lightbox__counter { bottom: -36px; }
+  .lightbox__img { max-height: 78vh; }
+}
+
 @media (max-width: 1024px) {
-  .reviews__card {
-    flex-basis: calc((100% - var(--gutter)) / 2);
+  .reviews__masonry {
+    column-count: 2;
+  }
+
+  .reviews__grid {
+    max-height: 560px;
   }
 }
 
-@media (max-width: 768px) {
-  .reviews__card {
-    /* Соседняя карточка выглядывает на 15% — это подсказка, что ленту
-       можно листать, без неё свайп не считывается. */
-    flex-basis: 85%;
+@media (max-width: 576px) {
+  /* В одну колонку: две на 360px дают по 170px на скриншот — там уже
+     не текст, а серая рябь. */
+  .reviews__masonry {
+    column-count: 1;
   }
 
-  .reviews__nav {
-    justify-content: center;
+  .reviews__grid {
+    max-height: 480px;
+  }
+
+  .lightbox {
+    padding: 12px;
+  }
+
+  .lightbox__img {
+    max-width: 96vw;
+    max-height: 80vh;
+  }
+
+  .lightbox__btn {
+    width: 40px;
+    height: 40px;
   }
 }
